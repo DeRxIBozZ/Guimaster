@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Guimaster</string>
+    <string name="parentView">parentView</string>
 </resources>
