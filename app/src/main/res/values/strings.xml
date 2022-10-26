@@ -5,4 +5,9 @@
     <string name="bcanvas">Zeichenfläche</string>
     <string name="bimportfile">Maschinenbefehldatei importieren</string>
     <string name="bimportpicture">Bild importieren</string>
+    <string name="dimension_fragment">Bitte Dimensionen des Werkstücks angeben:</string>
+    <string name="length">Länge :</string>
+    <string name="width">Breite :</string>
+    <string name="ok">Bestätigen</string>
+    <string name="back">Zurück</string>
 </resources>
