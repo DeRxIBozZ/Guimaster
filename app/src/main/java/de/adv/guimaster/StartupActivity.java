@@ -1,5 +1,6 @@
 package de.adv.guimaster;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -12,6 +13,8 @@ public class StartupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_startup);
+        Intent i1 = new Intent(StartupActivity.this,MainActivity.class);
+        StartupActivity.this.startActivity(i1);
 
     }
 }

@@ -1,17 +1,14 @@
 package de.adv.guimaster;
 
-import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
 
-public class ZeichenTool extends AppCompatActivity {
+import android.os.Bundle;
+
+public class PictureActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.zeichentool);
-
+        setContentView(R.layout.activity_picture);
     }
-
-
 }

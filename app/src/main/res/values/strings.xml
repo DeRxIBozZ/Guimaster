@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Guimaster</string>
     <string name="parentView">parentView</string>
+    <string name="bcontroller">Manuelle Ansteuerung</string>
+    <string name="bcanvas">Zeichenfläche</string>
+    <string name="bimportfile">Maschinenbefehldatei importieren</string>
+    <string name="bimportpicture">Bild importieren</string>
 </resources>
