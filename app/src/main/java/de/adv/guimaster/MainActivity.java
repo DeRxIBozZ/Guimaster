@@ -49,10 +49,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 MainActivity.this.startActivity(i3);
                 break;
             case (R.id.button4) :
-                DialogFragment newFragment = DimensionDialog.newInstance();
-                newFragment.show(getSupportFragmentManager(),"dialog");
-                /*Intent i4 = new Intent(MainActivity.this,ZeichenTool.class);
-                MainActivity.this.startActivity(i4);*/
+                Intent i4 = new Intent(MainActivity.this,ZeichenTool.class);
+                MainActivity.this.startActivity(i4);
                 break;
             default: break;
         }

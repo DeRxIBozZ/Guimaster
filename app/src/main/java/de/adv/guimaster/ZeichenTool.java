@@ -1,10 +1,16 @@
 package de.adv.guimaster;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import de.adv.guimaster.logic.Fragmentdata;
 
 public class ZeichenTool extends AppCompatActivity {
 
@@ -12,12 +18,29 @@ public class ZeichenTool extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.zeichentool);
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.fragment1,new Plateformat());
-        ft.commit();
+        DialogFragment newFragment = DimensionDialog.newInstance(this);
+        newFragment.show(getSupportFragmentManager(),"dialog");
 
     }
 
 
+    public void afterDialogClose(){
+        Integer length = Integer.valueOf(Fragmentdata.length);
+        Integer width = Integer.valueOf(Fragmentdata.width);
+        int colors = length * width;
+        int[] aColors = new int[colors];
+        for(int i = 0; i < colors; i++){
+            aColors[i] = ContextCompat.getColor(this,R.color.white);
+        }
+        Bitmap map = Bitmap.createBitmap(aColors,length,width,Bitmap.Config.RGBA_F16);
+        Canvas canvas = new Canvas(map);
+    }
 }
+
+
+
+
+
+
+
+
