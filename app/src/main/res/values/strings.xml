@@ -11,4 +11,9 @@
     <string name="ok">Bestätigen</string>
     <string name="back">Zurück</string>
     <string name="values">Bitte gültige Werte eingeben!</string>
+    <string name="x">X</string>
+    <string name="y">Y</string>
+    <string name="z">Z</string>
+    <string name="cncsign">Logo ADV auf Alu Platte</string>
+
 </resources>
