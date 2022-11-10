@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.MediaController;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,12 +17,17 @@ import de.adv.guimaster.logic.Constants;
 
 public class StartupActivity extends AppCompatActivity implements Runnable{
 
+    TextView tv;
+    ProgressBar pb;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_startup);
         VideoView vid = findViewById(R.id.videoView);
-        vid.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.gottlos));
+        tv = findViewById(R.id.textView);
+        pb = findViewById(R.id.progressBar3);
+        vid.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.cncsign));
         vid.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mediaPlayer) {
@@ -46,6 +53,6 @@ public class StartupActivity extends AppCompatActivity implements Runnable{
 
     @Override
     public void run() {
-        Constants.WZMCANVAS = ManuellerController.initCanvas();
+        Constants.WZMCANVAS = ManuellerController.initCanvas(tv,pb);
     }
 }

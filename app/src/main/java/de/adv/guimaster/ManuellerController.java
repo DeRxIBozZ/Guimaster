@@ -5,6 +5,8 @@ import android.graphics.Canvas;
 import android.graphics.ColorSpace;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,21 +17,47 @@ import de.adv.guimaster.logic.MatrixArray;
 
 public class ManuellerController extends AppCompatActivity implements View.OnClickListener{
 
-    int posx;
-    int posy;
+    int posx = Constants.WZMWIDTH;
+    int posy = Constants.WZMHEIGHT;
     Bitmap wzmb ;
     int[][] wzmm;
-    int[] whitepixelswzmheight = new int[10*Constants.WZMHEIGHT];
-    int[] opaquepixelswzmheight = new int[10*Constants.WZMHEIGHT];
+    int[] whitepixelswzmheight = new int[Constants.WZMHEIGHT * Constants.WZMWIDTH];
+    int[] opaquepixelswzmheight = new int[Constants.WZMHEIGHT * Constants.WZMWIDTH];
     CanvasViewController wzm;
-    public static CustomCanvas initCanvas(){
+
+    public static CustomCanvas initCanvas(TextView tv, ProgressBar pb){
         int [][] matrix = new int[Constants.WZMWIDTH][Constants.WZMHEIGHT];
+        int counter = 0;
+        int percent = 0;
+        int load = 1;
         for(int i = 0; i < Constants.WZMWIDTH; i++){
             for (int j = 0; j < Constants.WZMHEIGHT; j++){
-                if (j > (Constants.WZMHEIGHT - 30) || i > (Constants.WZMWIDTH - 30)) {
+                if (j >= (Constants.WZMHEIGHT - 30) || i >= (Constants.WZMWIDTH - 30)) {
                     matrix[i][j] = android.graphics.Color.argb(255,255,255,255);
                 } else {
                     matrix[i][j] = android.graphics.Color.argb(0,0,0,0);
+                }
+                counter++;
+                if(counter % 50 == 0){
+                    switch (load){
+                        case 1 :
+                            tv.setText(R.string.loading__);
+                            load++;
+                            break;
+                        case 2 :
+                            tv.setText(R.string.loading___);
+                            load++;
+                            break;
+                        case 3 :
+                            tv.setText(R.string.loading_);
+                            load = 1;
+                            break;
+                    }
+                }
+                if(counter == (Constants.WZMHEIGHT * Constants.WZMWIDTH / 100)){
+                    percent++;
+                    pb.setProgress(percent);
+                    counter = 0;
                 }
             }
         }
@@ -89,13 +117,15 @@ public class ManuellerController extends AppCompatActivity implements View.OnCli
             x = posx + diff;
             x2 = posxnew - 30;
             diff *= -1;
-            wzmb.setPixels(opaquepixelswzmheight, 0, 0, x, 0, diff, Constants.WZMHEIGHT);
-            wzmb.setPixels(whitepixelswzmheight, 0, 0, x2, 0, diff, Constants.WZMHEIGHT);
+            wzmb.setPixels(opaquepixelswzmheight, 0, Constants.WZMWIDTH, x, 0, diff, Constants.WZMHEIGHT);
+            wzmb.setPixels(whitepixelswzmheight, 0, Constants.WZMWIDTH, x2, 0, diff, Constants.WZMHEIGHT);
+            wzmb.setPixels(whitepixelswzmheight, 0, Constants.WZMWIDTH, x, posy-30, diff, (Constants.WZMHEIGHT - posy + 30));
         } else {
             x = posxnew - diff;
             x2 = posx - 30;
-            wzmb.setPixels(whitepixelswzmheight, 0, 0, x, 0, diff, Constants.WZMHEIGHT);
-            wzmb.setPixels(opaquepixelswzmheight, 0, 0, x2, 0, diff, Constants.WZMHEIGHT);
+            wzmb.setPixels(whitepixelswzmheight, 0, Constants.WZMWIDTH, x, 0, diff, Constants.WZMHEIGHT);
+            wzmb.setPixels(opaquepixelswzmheight, 0, Constants.WZMWIDTH, x2, 0, diff, Constants.WZMHEIGHT);
+            wzmb.setPixels(whitepixelswzmheight, 0, Constants.WZMWIDTH, x2, posy-30, diff, (Constants.WZMHEIGHT - posy + 30));
         }
         wzm.invalidate();
         posx = posxnew;
@@ -154,6 +184,7 @@ public class ManuellerController extends AppCompatActivity implements View.OnCli
             case (R.id.button7) :
                 if(posx <= 30){
                     Toast t1 = Toast.makeText(this,R.string.wzmpos,Toast.LENGTH_LONG);
+                    t1.show();
                 } else {
                     int posxnew = posx - 10;
                     updatexWzmBitmap(posxnew);
@@ -162,6 +193,7 @@ public class ManuellerController extends AppCompatActivity implements View.OnCli
             case (R.id.button12) :
                 if(posx >= Constants.WZMWIDTH){
                     Toast t1 = Toast.makeText(this,R.string.wzmpos,Toast.LENGTH_LONG);
+                    t1.show();
                 } else {
                     int posxnew = posx + 10;
                     updatexWzmBitmap(posxnew);
@@ -170,6 +202,7 @@ public class ManuellerController extends AppCompatActivity implements View.OnCli
             case (R.id.button9) :
                 if(posy <= 30){
                     Toast t1 = Toast.makeText(this,R.string.wzmpos,Toast.LENGTH_LONG);
+                    t1.show();
                 } else {
                     int posynew = posy - 10;
                     updateyWzmBitmap(posynew);
@@ -178,6 +211,7 @@ public class ManuellerController extends AppCompatActivity implements View.OnCli
             case (R.id.button10) :
                 if(posy >= Constants.WZMHEIGHT){
                     Toast t1 = Toast.makeText(this,R.string.wzmpos,Toast.LENGTH_LONG);
+                    t1.show();
                 } else {
                     int posynew = posy + 10;
                     updateyWzmBitmap(posynew);

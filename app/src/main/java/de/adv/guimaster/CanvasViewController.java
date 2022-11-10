@@ -13,6 +13,7 @@ public class CanvasViewController extends View {
 
     public Bitmap bitmap;
 
+
     public CanvasViewController(Context context, @Nullable AttributeSet attrs, int defStyleAttr){
         super(context, attrs, defStyleAttr);
     }
@@ -32,7 +33,6 @@ public class CanvasViewController extends View {
             canvas.drawBitmap(bitmap,0,0,null);
         }
         super.onDraw(canvas);
-        Log.i("test","test");
     }
 
 }

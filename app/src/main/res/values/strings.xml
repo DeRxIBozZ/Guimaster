@@ -16,5 +16,9 @@
     <string name="z">Z</string>
     <string name="cncsign">Logo ADV auf Alu Platte</string>
     <string name="wzmpos">Werkzeugmaschine kann nicht weiter in diese Richtung gefahren werden</string>
+    <string name="loading.">Lädt.</string>
+    <string name="loading..">Lädt..</string>
+    <string name="loading...">Lädt...</string>
+
 
 </resources>
