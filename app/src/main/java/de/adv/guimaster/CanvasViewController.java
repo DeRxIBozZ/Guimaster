@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -29,10 +30,9 @@ public class CanvasViewController extends View {
     public void onDraw(Canvas canvas){
         if(this.bitmap != null){
             canvas.drawBitmap(bitmap,0,0,null);
-            canvas.scale(2,2);
         }
         super.onDraw(canvas);
-
+        Log.i("test","test");
     }
 
 }

@@ -11,7 +11,9 @@ import android.widget.VideoView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-public class StartupActivity extends AppCompatActivity {
+import de.adv.guimaster.logic.Constants;
+
+public class StartupActivity extends AppCompatActivity implements Runnable{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,9 @@ public class StartupActivity extends AppCompatActivity {
                 int duration = mediaPlayer.getDuration();
                 duration += 500;
                 mediaPlayer.start();
+                StartupActivity sa = new StartupActivity();
+                Thread initThread = new Thread(sa);
+                initThread.start();
                 try{
                     Thread.sleep(duration);
                 } catch (InterruptedException ie) {
@@ -37,5 +42,10 @@ public class StartupActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public void run() {
+        Constants.WZMCANVAS = ManuellerController.initCanvas();
     }
 }
