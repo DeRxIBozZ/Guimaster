@@ -1,27 +1,26 @@
 package de.adv.guimaster;
 
 import android.content.Intent;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.MediaController;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import java.util.Timer;
 
-import de.adv.guimaster.logic.Constants;
-import de.adv.guimaster.logic.TimerLoading;
+import de.adv.guimaster.logic.CustomCanvas;
+import de.adv.guimaster.logic.DataHolder;
+import de.adv.guimaster.logic.ThreadJoin;
 
-public class StartupActivity extends AppCompatActivity implements Runnable{
+public class StartupActivity extends AppCompatActivity {
 
-    TextView tv;
-    ProgressBar pb;
+    public TextView tv;
+    public ProgressBar pb;
+    public Timer t1;
+    public CustomCanvas ca;
+    int count = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,35 +29,21 @@ public class StartupActivity extends AppCompatActivity implements Runnable{
         VideoView vid = findViewById(R.id.videoView);
         tv = findViewById(R.id.textView);
         pb = findViewById(R.id.progressBar3);
-        Timer timer = new Timer();
-        TimerLoading task = new TimerLoading(tv);
-        vid.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.cncsign));
-        vid.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mediaPlayer) {
-                int duration = mediaPlayer.getDuration();
-                duration += 500;
-                mediaPlayer.start();
-                StartupActivity sa = new StartupActivity();
-                Thread initThread = new Thread(sa);
-                initThread.start();
-                timer.scheduleAtFixedRate(task,250,250);
-                try{
-                    Thread.sleep(duration);
-                } catch (InterruptedException ie) {
-                    ie.printStackTrace();
-                }
-                mediaPlayer.stop();
-                Intent i1 = new Intent(StartupActivity.this,MainActivity.class);
-                StartupActivity.this.startActivity(i1);
-            }
-        });
-
-
+        ca = new CustomCanvas(pb);
+        ThreadJoin tj = new ThreadJoin(ca,this);
+        ca.start();
+        tj.start();
     }
 
-    @Override
-    public void run() {
-        Constants.WZMCANVAS = ManuellerController.initCanvas(tv,pb);
+    public void finishStartup(){
+        DataHolder.getInstance().save("CustomCanvas", ca);
+        Intent i1 = new Intent(StartupActivity.this, MainActivity.class);
+        StartupActivity.this.startActivity(i1);
     }
+
 }
+
+
+
+
+
