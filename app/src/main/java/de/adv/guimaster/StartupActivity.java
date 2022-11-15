@@ -13,7 +13,10 @@ import android.widget.VideoView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import java.util.Timer;
+
 import de.adv.guimaster.logic.Constants;
+import de.adv.guimaster.logic.TimerLoading;
 
 public class StartupActivity extends AppCompatActivity implements Runnable{
 
@@ -27,6 +30,8 @@ public class StartupActivity extends AppCompatActivity implements Runnable{
         VideoView vid = findViewById(R.id.videoView);
         tv = findViewById(R.id.textView);
         pb = findViewById(R.id.progressBar3);
+        Timer timer = new Timer();
+        TimerLoading task = new TimerLoading(tv);
         vid.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.cncsign));
         vid.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
@@ -37,6 +42,7 @@ public class StartupActivity extends AppCompatActivity implements Runnable{
                 StartupActivity sa = new StartupActivity();
                 Thread initThread = new Thread(sa);
                 initThread.start();
+                timer.scheduleAtFixedRate(task,250,250);
                 try{
                     Thread.sleep(duration);
                 } catch (InterruptedException ie) {

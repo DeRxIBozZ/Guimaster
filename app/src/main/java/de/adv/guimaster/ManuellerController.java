@@ -19,11 +19,11 @@ public class ManuellerController extends AppCompatActivity implements View.OnCli
 
     int posx = Constants.WZMWIDTH;
     int posy = Constants.WZMHEIGHT;
+    CanvasViewController wzm;
     Bitmap wzmb;
     int[][] wzmm;
     int[] whitepixelswzmheight = new int[Constants.WZMHEIGHT * Constants.WZMWIDTH];
     int[] opaquepixelswzmheight = new int[Constants.WZMHEIGHT * Constants.WZMWIDTH];
-    CanvasViewController wzm;
 
     public static CustomCanvas initCanvas(TextView tv, ProgressBar pb){
         int [][] matrix = new int[Constants.WZMWIDTH][Constants.WZMHEIGHT];

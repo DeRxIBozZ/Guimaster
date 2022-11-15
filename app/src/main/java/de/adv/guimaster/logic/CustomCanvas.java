@@ -4,16 +4,15 @@ import android.graphics.Bitmap;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class CustomCanvas {
+public class CustomCanvas implements Runnable{
     public Bitmap bitmap;
     public int[] whitepixels;
     public int[] opaquepixels;
     public int[][] machinematrix;
     public int[][] depthmatrix;
-    public TextView tv;
     public ProgressBar pb;
 
-    public CustomCanvas() {
-
+    public CustomCanvas(ProgressBar pb){
+        this.pb = pb;
     }
 }
