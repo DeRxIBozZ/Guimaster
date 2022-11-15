@@ -19,7 +19,7 @@ public class ManuellerController extends AppCompatActivity implements View.OnCli
 
     int posx = Constants.WZMWIDTH;
     int posy = Constants.WZMHEIGHT;
-    Bitmap wzmb ;
+    Bitmap wzmb;
     int[][] wzmm;
     int[] whitepixelswzmheight = new int[Constants.WZMHEIGHT * Constants.WZMWIDTH];
     int[] opaquepixelswzmheight = new int[Constants.WZMHEIGHT * Constants.WZMWIDTH];

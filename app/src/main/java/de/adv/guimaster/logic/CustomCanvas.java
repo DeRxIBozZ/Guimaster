@@ -1,29 +1,19 @@
 package de.adv.guimaster.logic;
 
 import android.graphics.Bitmap;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 public class CustomCanvas {
-    public int[][] matrix;
     public Bitmap bitmap;
+    public int[] whitepixels;
+    public int[] opaquepixels;
+    public int[][] machinematrix;
+    public int[][] depthmatrix;
+    public TextView tv;
+    public ProgressBar pb;
 
-    public int[][] getMatrix() {
-        return matrix;
-    }
+    public CustomCanvas() {
 
-    public void setMatrix(int[][] matrix) {
-        this.matrix = matrix;
-    }
-
-    public Bitmap getBitmap() {
-        return bitmap;
-    }
-
-    public void setBitmap(Bitmap bitmap) {
-        this.bitmap = bitmap;
-    }
-
-    public CustomCanvas(int[][] matrix, Bitmap bitmap) {
-        this.matrix = matrix;
-        this.bitmap = bitmap;
     }
 }
