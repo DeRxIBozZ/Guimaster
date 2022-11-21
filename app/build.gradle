@@ -33,6 +33,8 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation files('build/libs/jSerialComm-2.9.2.jar')
+    implementation files('build/libs/commons-lang3-3.12.0.jar')
     //implementation 'com.github.ajithvgiri:Canvas-Library:v1.1.1'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

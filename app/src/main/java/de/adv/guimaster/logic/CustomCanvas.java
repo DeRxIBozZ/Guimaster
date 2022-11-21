@@ -2,9 +2,6 @@ package de.adv.guimaster.logic;
 
 import android.graphics.Bitmap;
 import android.widget.ProgressBar;
-import android.widget.TextView;
-
-import de.adv.guimaster.R;
 
 public class CustomCanvas extends Thread {
     public Bitmap wzmbitmap;
@@ -49,7 +46,7 @@ public class CustomCanvas extends Thread {
                 counter++;
                 if (operations % counter == 0) {
                     percent++;
-                    pb.setProgress(percent);
+                    //pb.setProgress(percent);
                 }
             }
         }
@@ -66,5 +63,6 @@ public class CustomCanvas extends Thread {
         }
         Bitmap bitmap = Bitmap.createBitmap(MatrixArray.toArray(machinematrix), Constants.WZMWIDTH, Constants.WZMHEIGHT, Bitmap.Config.ARGB_8888);
         wzmbitmap = bitmap.copy(Bitmap.Config.ARGB_8888,true);
+
     }
 }
