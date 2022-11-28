@@ -8,9 +8,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import de.adv.guimaster.logic.Constants;
 import de.adv.guimaster.logic.CustomCanvas;
 import de.adv.guimaster.logic.DataHolder;
@@ -20,11 +18,10 @@ public class ManuellerController extends AppCompatActivity implements View.OnCli
 
     int posx = Constants.WZMWIDTH;
     int posy = Constants.WZMHEIGHT;
+    int posz = 0;
     CustomCanvas ca;
     CanvasViewController wzm;
-    Bitmap wzmb;
     CanvasViewController bar;
-    Bitmap barb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,19 +32,14 @@ public class ManuellerController extends AppCompatActivity implements View.OnCli
         findViewById(R.id.button9).setOnClickListener(this);
         findViewById(R.id.button10).setOnClickListener(this);
         findViewById(R.id.button12).setOnClickListener(this);
+        findViewById(R.id.button8).setOnClickListener(this);
+        findViewById(R.id.button11).setOnClickListener(this);
         wzm = findViewById(R.id.canvasViewController);
         wzm.setBitmap(ca.wzmbitmap);
         wzm.invalidate();
-        //bar = findViewById(R.id.canvasViewController2);
-        /*for(int i = 0; i < barwidth; i++){
-            for(int j = 0; j < barheight; j++){
-                bara[i][j] = getColor(R.color.black);
-            }
-        }
-        barb = Bitmap.createBitmap(MatrixArray.toArray(bara),barwidth,barheight,Bitmap.Config.ARGB_8888);
-        barb = barb.copy(Bitmap.Config.ARGB_8888,true);
-        bar.setBitmap(barb);
-        bar.invalidate();*/
+        bar = findViewById(R.id.canvasViewController2);
+        bar.setBitmap(ca.depthbitmap);
+        bar.invalidate();
     }
 
     private void updatexWzmBitmap(int posxnew) {
@@ -109,6 +101,16 @@ public class ManuellerController extends AppCompatActivity implements View.OnCli
         posy = posynew;
     }
 
+    private void updateZ(boolean up){
+        if(posz < 0) posz = 0;
+        if(posz > (Constants.DEPTHHEIGHT - 50)) posz = Constants.DEPTHHEIGHT - 50;
+        if(up){
+            ca.depthbitmap.setPixels(ca.opaquepixels,0,Constants.DEPTHWIDTH,0,posz - 50,Constants.DEPTHWIDTH,50);
+        } else {
+            ca.depthbitmap.setPixels(ca.silverpixels,0,Constants.DEPTHWIDTH,0,posz,Constants.DEPTHWIDTH,50);
+        }
+    }
+
         /*if(posy < 30){
             posy = 30;
         }
@@ -165,6 +167,24 @@ public class ManuellerController extends AppCompatActivity implements View.OnCli
                 } else {
                     int posynew = posy + 10;
                     updateyWzmBitmap(posynew);
+                }
+                break;
+            case (R.id.button8):
+                if (posz == 0){
+                    Toast t1 = Toast.makeText(this,R.string.wzmpos,Toast.LENGTH_LONG);
+                    t1.show();
+                } else {
+                    posz -= 50;
+                    updateZ(true);
+                }
+                break;
+            case (R.id.button11):
+                if(posz >= Constants.DEPTHHEIGHT - 50){
+                    Toast t1 = Toast.makeText(this,R.string.wzmpos,Toast.LENGTH_LONG);
+                    t1.show();
+                } else {
+                    posz += 50;
+                    updateZ(false);
                 }
                 break;
         }

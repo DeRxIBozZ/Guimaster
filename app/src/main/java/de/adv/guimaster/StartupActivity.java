@@ -10,7 +10,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.hoho.android.usbserial.driver.UsbSerialDriver;
+import com.hoho.android.usbserial.driver.UsbSerialPort;
+import com.hoho.android.usbserial.driver.UsbSerialProber;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -25,6 +32,7 @@ import java.util.stream.Collectors;
 import de.adv.guimaster.backend.CncState;
 import de.adv.guimaster.backend.Instructions;
 import de.adv.guimaster.backend.SerialAPI;
+import de.adv.guimaster.logic.Constants;
 import de.adv.guimaster.logic.CustomCanvas;
 import de.adv.guimaster.logic.DataHolder;
 import de.adv.guimaster.logic.Drivers;
@@ -34,12 +42,7 @@ public class StartupActivity extends AppCompatActivity {
     public TextView tv;
     public ProgressBar pb;
     public CustomCanvas ca;
-    UsbManager usbmanager;
-    UsbDevice usbdevice;
-    UsbInterface usbinterface;
-    UsbEndpoint usbendpoint;
-    UsbDeviceConnection usbconnection;
-
+    UsbSerialPort serialPort;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +51,10 @@ public class StartupActivity extends AppCompatActivity {
             Process clearprocess = Runtime.getRuntime().exec("logcat -c");
             Thread.sleep(500);
         }catch (Exception e){ Log.v("LogClear","Exception");}
-        Drivers d = new Drivers();
         setContentView(R.layout.activity_startup);
         tv = findViewById(R.id.textView);
         pb = findViewById(R.id.progressBar3);
-        ca = new CustomCanvas(pb);
-
+        ca = new CustomCanvas();
     }
 
     @Override
@@ -67,39 +68,32 @@ public class StartupActivity extends AppCompatActivity {
         saveLogcatToFile(this);
     }
 
-
-
-
     public void progressAnimation(){
         ProgressBarAnimation barAnimation = new ProgressBarAnimation(this,pb,tv);
         barAnimation.setDuration(5000);
         pb.setAnimation(barAnimation);
     }
 
-
     public void initSerialComm(){
-        this.usbmanager = (UsbManager) getSystemService(Context.USB_SERVICE);
-        HashMap<String, UsbDevice> deviceList= usbmanager.getDeviceList();
-        int i = 1;
-        Set<String> deviceSet = deviceList.keySet();
-        Log.v("Set" , String.valueOf(deviceSet.isEmpty()));
-        for (String key : deviceList.keySet()) {
-            //Log.v("Ergebnis equals", String.valueOf(Objects.equals(key,"/dev/bus/usb/001/002")));
-            //if(Objects.equals(key, "/dev/bus/usb/001/002")) {
-                this.usbdevice = deviceList.get(key);
-                Log.v("Anzahl Interfaces" , String.valueOf(usbdevice.getInterfaceCount()));
-                this.usbinterface = usbdevice.getInterface(0);
-                Log.v("Anzahl Endpoints" , String.valueOf(usbinterface.getEndpointCount()));
-                this.usbendpoint = usbinterface.getEndpoint(0);
-                //this.usbconnection = usbmanager.openDevice(usbdevice);
-                //usbconnection.setInterface(usbinterface);
-                //usbconnection.claimInterface(usbinterface,true);
-                //initCncCommand();
-            //}0
+        UsbManager manager = (UsbManager) getSystemService(Context.USB_SERVICE);
+        List<UsbSerialDriver> availableDrivers = UsbSerialProber.getDefaultProber().findAllDrivers(manager);
+        if(availableDrivers.isEmpty()){
+            return;
         }
-
+        UsbSerialDriver driver = availableDrivers.get(0);
+        UsbDeviceConnection usbconnection = manager.openDevice(driver.getDevice());
+        if(usbconnection == null){
+            return;
+        }
+        serialPort = driver.getPorts().get(0);
+        try {
+            serialPort.open(usbconnection);
+            serialPort.setParameters(38400,8,UsbSerialPort.STOPBITS_1,UsbSerialPort.PARITY_NONE);
+            initCncCommand();
+        } catch (IOException ioException){
+            Log.v("IOException",ioException.getMessage());
+        }
     }
-
 
     public static void saveLogcatToFile(Context context) {
         String fileName = "logcat_"+System.currentTimeMillis()+".txt";
@@ -243,8 +237,12 @@ public class StartupActivity extends AppCompatActivity {
 
     public void sendStringToComm(String command){
         byte[] buffer = command.getBytes();
-        int length = buffer.length;
-        usbconnection.bulkTransfer(usbendpoint,buffer,length,0);
+        try {
+            serialPort.write(buffer, Constants.WRITE_WAIT_MILLIS);
+        } catch (IOException ioException){
+            Toast toast = Toast.makeText(this,ioException.getMessage(),Toast.LENGTH_LONG);
+            toast.show();
+        }
     }
 }
 

@@ -12,6 +12,7 @@ public class ProgressBarAnimation extends Animation {
     private Context context;
     private ProgressBar progressBar;
     private TextView textView;
+    int casenum;
     int count;
 
 
@@ -19,7 +20,8 @@ public class ProgressBarAnimation extends Animation {
         this.context = context;
         this.progressBar = progressBar;
         this.textView = textView;
-        this.count = 1;
+        this.count = 0;
+        this.casenum = 1;
     }
 
     @Override
@@ -27,21 +29,23 @@ public class ProgressBarAnimation extends Animation {
         super.applyTransformation(interpolatedTime, t);
         float value = 100 * interpolatedTime;
         progressBar.setProgress((int) value);
-        switch (count){
-            case 1 :
-                textView.setText(R.string.loading__);
-                count++;
-                break;
-            case 2 :
-                textView.setText(R.string.loading___);
-                count++;
-                break;
-            case 3 :
-                textView.setText(R.string.loading_);
-                count = 1;
-                break;
+        if(count % 50 == 0) {
+            switch (casenum) {
+                case 1:
+                    textView.setText(R.string.loading__);
+                    casenum++;
+                    break;
+                case 2:
+                    textView.setText(R.string.loading___);
+                    casenum++;
+                    break;
+                case 3:
+                    textView.setText(R.string.loading_);
+                    casenum = 1;
+                    break;
+            }
         }
-
+        count++;
         if(value == 100){
             context.startActivity(new Intent(context,MainActivity.class));
         }
