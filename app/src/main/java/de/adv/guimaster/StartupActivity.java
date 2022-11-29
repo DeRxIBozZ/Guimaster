@@ -1,10 +1,7 @@
 package de.adv.guimaster;
 
 import android.content.Context;
-import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbDeviceConnection;
-import android.hardware.usb.UsbEndpoint;
-import android.hardware.usb.UsbInterface;
 import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,29 +17,18 @@ import com.hoho.android.usbserial.driver.UsbSerialProber;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.Timer;
-import java.util.stream.Collectors;
-import de.adv.guimaster.backend.CncState;
-import de.adv.guimaster.backend.Instructions;
-import de.adv.guimaster.backend.SerialAPI;
+
 import de.adv.guimaster.logic.Constants;
 import de.adv.guimaster.logic.CustomCanvas;
 import de.adv.guimaster.logic.DataHolder;
-import de.adv.guimaster.logic.Drivers;
 
 public class StartupActivity extends AppCompatActivity {
 
     public TextView tv;
     public ProgressBar pb;
     public CustomCanvas ca;
-    UsbSerialPort serialPort;
+    public UsbSerialPort serialPort;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +50,7 @@ public class StartupActivity extends AppCompatActivity {
         ca.start();
         DataHolder.getInstance().save("CustomCanvas", ca);
         initSerialComm();
-        try{ Thread.sleep(500);} catch (InterruptedException ie){ie.printStackTrace();}
+        try{ Thread.sleep(500); } catch (InterruptedException ie) {ie.printStackTrace();}
         saveLogcatToFile(this);
     }
 
@@ -127,7 +113,7 @@ public class StartupActivity extends AppCompatActivity {
                 Log.v("CnC",e.getMessage());
                 saveLogcatToFile(this);
             }
-        } */
+        }*/
 
     public void initCncCommand(){
         sendStringToComm("P0010=38400;");

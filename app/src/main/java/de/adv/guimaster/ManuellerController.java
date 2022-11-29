@@ -18,7 +18,7 @@ public class ManuellerController extends AppCompatActivity implements View.OnCli
 
     int posx = Constants.WZMWIDTH;
     int posy = Constants.WZMHEIGHT;
-    int posz = 0;
+    int posz = 50;
     CustomCanvas ca;
     CanvasViewController wzm;
     CanvasViewController bar;
@@ -101,14 +101,17 @@ public class ManuellerController extends AppCompatActivity implements View.OnCli
         posy = posynew;
     }
 
-    private void updateZ(boolean up){
-        if(posz < 0) posz = 0;
-        if(posz > (Constants.DEPTHHEIGHT - 50)) posz = Constants.DEPTHHEIGHT - 50;
-        if(up){
-            ca.depthbitmap.setPixels(ca.opaquepixels,0,Constants.DEPTHWIDTH,0,posz - 50,Constants.DEPTHWIDTH,50);
+    private void updateZ(int posznew){
+        if(posznew < 0) posz = 0;
+        if(posznew > (Constants.DEPTHHEIGHT - 50)) posz = Constants.DEPTHHEIGHT - 50;
+        int diff = posz - posznew;
+        if(diff > 0){
+            ca.depthbitmap.setPixels(ca.opaquepixels,0,Constants.DEPTHWIDTH,0,posznew ,Constants.DEPTHWIDTH,diff);
         } else {
-            ca.depthbitmap.setPixels(ca.silverpixels,0,Constants.DEPTHWIDTH,0,posz,Constants.DEPTHWIDTH,50);
+            diff *= -1;
+            ca.depthbitmap.setPixels(ca.silverpixels,0,Constants.DEPTHWIDTH,0,posz,Constants.DEPTHWIDTH,diff);
         }
+        posz = posznew;
     }
 
         /*if(posy < 30){
@@ -174,17 +177,17 @@ public class ManuellerController extends AppCompatActivity implements View.OnCli
                     Toast t1 = Toast.makeText(this,R.string.wzmpos,Toast.LENGTH_LONG);
                     t1.show();
                 } else {
-                    posz -= 50;
-                    updateZ(true);
+                    int posznew = posz - 50;
+                    updateZ(posznew);
                 }
                 break;
             case (R.id.button11):
-                if(posz >= Constants.DEPTHHEIGHT - 50){
+                if(posz >= Constants.DEPTHHEIGHT){
                     Toast t1 = Toast.makeText(this,R.string.wzmpos,Toast.LENGTH_LONG);
                     t1.show();
                 } else {
-                    posz += 50;
-                    updateZ(false);
+                    int posznew = posz + 50;
+                    updateZ(posznew);
                 }
                 break;
         }

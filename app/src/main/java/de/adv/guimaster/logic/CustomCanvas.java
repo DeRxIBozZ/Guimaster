@@ -52,9 +52,9 @@ public class CustomCanvas extends Thread {
             }
         }
         silverpixels = new int[Constants.DEPTHWIDTH*Constants.DEPTHHEIGHT];
-        for (int i = 0; i < Constants.WZMWIDTH; i++) {
-            for (int j = 0; j < Constants.WZMHEIGHT; j++) {
-                opaquepixels[Constants.WZMHEIGHT * i + j] = android.graphics.Color.argb(0,0,0,0);
+        for (int i = 0; i < Constants.DEPTHWIDTH; i++) {
+            for (int j = 0; j < Constants.DEPTHHEIGHT; j++) {
+                silverpixels[Constants.DEPTHHEIGHT * i + j] = android.graphics.Color.argb(255,170,169,173);
             }
         }
         Bitmap bitmap1 = Bitmap.createBitmap(MatrixArray.toArray(depthmatrix), Constants.DEPTHWIDTH, Constants.DEPTHHEIGHT, Bitmap.Config.ARGB_8888);
