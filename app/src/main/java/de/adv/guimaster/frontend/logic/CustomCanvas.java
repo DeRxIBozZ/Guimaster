@@ -1,7 +1,6 @@
-package de.adv.guimaster.logic;
+package de.adv.guimaster.frontend.logic;
 
 import android.graphics.Bitmap;
-import android.widget.ProgressBar;
 
 public class CustomCanvas extends Thread {
     public Bitmap wzmbitmap;

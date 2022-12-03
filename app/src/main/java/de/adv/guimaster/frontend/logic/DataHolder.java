@@ -1,4 +1,4 @@
-package de.adv.guimaster.logic;
+package de.adv.guimaster.frontend.logic;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;

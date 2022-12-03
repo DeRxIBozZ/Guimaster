@@ -1,4 +1,4 @@
-package de.adv.guimaster;
+package de.adv.guimaster.frontend.uitools;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -15,13 +15,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 
-import de.adv.guimaster.logic.Fragmentdata;
+import de.adv.guimaster.R;
+import de.adv.guimaster.frontend.activity.MainActivity;
+import de.adv.guimaster.frontend.activity.ZeichenTool;
+import de.adv.guimaster.frontend.logic.Fragmentdata;
 
 public class DimensionDialog extends DialogFragment implements View.OnClickListener, View.OnKeyListener {
 
-    public  ZeichenTool ztool;
+    public ZeichenTool ztool;
 
 
 
@@ -68,7 +70,7 @@ public class DimensionDialog extends DialogFragment implements View.OnClickListe
                 }
             case (R.id.button6) :
                 this.dismiss();
-                Intent i1 = new Intent(getActivity(),MainActivity.class);
+                Intent i1 = new Intent(getActivity(), MainActivity.class);
                 startActivity(i1);
         }
     }

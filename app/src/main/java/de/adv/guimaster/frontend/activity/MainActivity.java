@@ -1,17 +1,14 @@
-package de.adv.guimaster;
+package de.adv.guimaster.frontend.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RelativeLayout;
+
+import de.adv.guimaster.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 

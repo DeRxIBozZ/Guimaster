@@ -1,4 +1,4 @@
-package de.adv.guimaster;
+package de.adv.guimaster.frontend.uitools;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,6 +6,9 @@ import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import de.adv.guimaster.R;
+import de.adv.guimaster.frontend.activity.MainActivity;
 
 public class ProgressBarAnimation extends Animation {
 
@@ -47,7 +50,7 @@ public class ProgressBarAnimation extends Animation {
         }
         count++;
         if(value == 100){
-            context.startActivity(new Intent(context,MainActivity.class));
+            context.startActivity(new Intent(context, MainActivity.class));
         }
     }
 }

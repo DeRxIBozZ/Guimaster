@@ -1,4 +1,4 @@
-package de.adv.guimaster;
+package de.adv.guimaster.frontend.activity;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -7,10 +7,10 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
-import de.adv.guimaster.logic.Fragmentdata;
+import de.adv.guimaster.R;
+import de.adv.guimaster.frontend.uitools.DimensionDialog;
+import de.adv.guimaster.frontend.logic.Fragmentdata;
 
 public class ZeichenTool extends AppCompatActivity {
 
