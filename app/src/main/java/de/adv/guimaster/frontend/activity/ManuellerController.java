@@ -1,18 +1,15 @@
-package de.adv.guimaster;
+package de.adv.guimaster.frontend.activity;
 
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.ColorSpace;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import de.adv.guimaster.logic.Constants;
-import de.adv.guimaster.logic.CustomCanvas;
-import de.adv.guimaster.logic.DataHolder;
-import de.adv.guimaster.logic.MatrixArray;
+
+import de.adv.guimaster.R;
+import de.adv.guimaster.frontend.uitools.CanvasViewController;
+import de.adv.guimaster.frontend.logic.Constants;
+import de.adv.guimaster.frontend.logic.CustomCanvas;
+import de.adv.guimaster.frontend.logic.DataHolder;
 
 public class ManuellerController extends AppCompatActivity implements View.OnClickListener {
 

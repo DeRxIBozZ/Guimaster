@@ -1,4 +1,4 @@
-package de.adv.guimaster.logic;
+package de.adv.guimaster.frontend.logic;
 
 
 public class Constants {

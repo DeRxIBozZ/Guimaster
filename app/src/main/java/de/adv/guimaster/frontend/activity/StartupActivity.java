@@ -1,4 +1,4 @@
-package de.adv.guimaster;
+package de.adv.guimaster.frontend.activity;
 
 import android.app.PendingIntent;
 import android.content.Context;
@@ -24,9 +24,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-import de.adv.guimaster.logic.Constants;
-import de.adv.guimaster.logic.CustomCanvas;
-import de.adv.guimaster.logic.DataHolder;
+import de.adv.guimaster.R;
+import de.adv.guimaster.frontend.uitools.ProgressBarAnimation;
+import de.adv.guimaster.frontend.logic.Constants;
+import de.adv.guimaster.frontend.logic.CustomCanvas;
+import de.adv.guimaster.frontend.logic.DataHolder;
 
 public class StartupActivity extends AppCompatActivity {
 
