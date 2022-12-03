@@ -1,4 +1,4 @@
-package de.adv.guimaster.frontend.logic;
+package de.adv.guimaster.logic;
 
 import android.util.Log;
 

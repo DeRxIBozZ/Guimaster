@@ -1,4 +1,4 @@
-package de.adv.guimaster.frontend.logic;
+package de.adv.guimaster.logic;
 
 public class Fragmentdata {
 

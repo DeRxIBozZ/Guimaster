@@ -1,4 +1,4 @@
-package de.adv.guimaster.frontend.uitools;
+package de.adv.guimaster;
 
 import android.content.Context;
 import android.graphics.Bitmap;

@@ -1,16 +1,14 @@
-package de.adv.guimaster.frontend.activity;
+package de.adv.guimaster;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import de.adv.guimaster.R;
-
-public class FileActivity extends AppCompatActivity {
+public class PictureActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_file);
+        setContentView(R.layout.activity_picture);
     }
 }

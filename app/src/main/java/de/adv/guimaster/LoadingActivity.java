@@ -1,10 +1,8 @@
-package de.adv.guimaster.frontend.activity;
+package de.adv.guimaster;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import de.adv.guimaster.R;
 
 public class LoadingActivity extends AppCompatActivity {
 

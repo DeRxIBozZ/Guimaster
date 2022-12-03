@@ -12,21 +12,21 @@
         android:theme="@style/Theme.Guimaster"
         tools:targetApi="31">
         <activity
-            android:name=".frontend.activity.PictureActivity"
+            android:name=".PictureActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".frontend.activity.FileActivity"
+            android:name=".FileActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".frontend.activity.StartupActivity"
+            android:name=".StartupActivity"
             android:exported="true"
             android:screenOrientation="landscape">
             <intent-filter>
@@ -40,16 +40,16 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".frontend.activity.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name" />
         <activity
-            android:name=".frontend.activity.LoadingActivity"
+            android:name=".LoadingActivity"
             android:label="@string/app_name" />
         <activity
-            android:name=".frontend.activity.ManuellerController"
+            android:name=".ManuellerController"
             android:label="@string/app_name" />
         <activity
-            android:name=".frontend.activity.ZeichenTool"
+            android:name=".ZeichenTool"
             android:label="@string/app_name" />
     </application>
 
