@@ -1,6 +1,9 @@
 package de.adv.guimaster;
 
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbManager;
 import android.os.Bundle;
@@ -17,7 +20,9 @@ import com.hoho.android.usbserial.driver.UsbSerialProber;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import de.adv.guimaster.logic.Constants;
 import de.adv.guimaster.logic.CustomCanvas;
@@ -63,10 +68,20 @@ public class StartupActivity extends AppCompatActivity {
     public void initSerialComm(){
         UsbManager manager = (UsbManager) getSystemService(Context.USB_SERVICE);
         List<UsbSerialDriver> availableDrivers = UsbSerialProber.getDefaultProber().findAllDrivers(manager);
+        Log.v("Driver leer?" , String.valueOf(availableDrivers.isEmpty()));
         if(availableDrivers.isEmpty()){
             return;
         }
         UsbSerialDriver driver = availableDrivers.get(0);
+        HashMap<String,UsbDevice> devices = manager.getDeviceList();
+        Set<String> key = devices.keySet();
+        UsbDevice device = null;
+        for(String s: key){
+            device = devices.get(s);
+        }
+        PendingIntent pi = PendingIntent.getBroadcast(this,0,new Intent("de.adv.guimaster.USB_PERMISSION"),0);
+        manager.requestPermission(device,pi);
+        Log.v("Permission",String.valueOf(manager.hasPermission(device)));
         UsbDeviceConnection usbconnection = manager.openDevice(driver.getDevice());
         if(usbconnection == null){
             return;
