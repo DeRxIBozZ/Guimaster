@@ -1,6 +1,7 @@
 package de.adv.guimaster.frontend.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -54,15 +55,29 @@ public class ManuellerController extends AppCompatActivity implements View.OnCli
             x = posx + diff;
             x2 = posxnew - 30;
             diff *= -1;
-            ca.wzmbitmap.setPixels(ca.opaquepixels, 0, Constants.WZMWIDTH, x, 0, diff, Constants.WZMHEIGHT);
-            ca.wzmbitmap.setPixels(ca.whitepixels, 0, Constants.WZMWIDTH, x2, 0, diff, Constants.WZMHEIGHT);
-            ca.wzmbitmap.setPixels(ca.whitepixels, 0, Constants.WZMWIDTH, x, posy - 30, diff, 30);
+            for (int i = 1; i <= diff; i++) {
+                ca.wzmbitmap.setPixels(ca.opaquepixels, 0, Constants.WZMWIDTH, x + diff - i, 0, 1, Constants.WZMHEIGHT);
+                ca.wzmbitmap.setPixels(ca.whitepixels, 0, Constants.WZMWIDTH, x2 + diff - i, 0, 1, Constants.WZMHEIGHT);
+                ca.wzmbitmap.setPixels(ca.whitepixels, 0, Constants.WZMWIDTH, x + diff - i, posy - 30, 1, 30);
+                try {
+                    Thread.sleep(30);
+                } catch (InterruptedException ie) {
+                    Log.v("Exception",ie.getMessage());
+                }
+            }
         } else {
             x = posxnew - diff;
             x2 = posx - 30;
-            ca.wzmbitmap.setPixels(ca.whitepixels, 0, Constants.WZMWIDTH, x, 0, diff, Constants.WZMHEIGHT);
-            ca.wzmbitmap.setPixels(ca.opaquepixels, 0, Constants.WZMWIDTH, x2, 0, diff, Constants.WZMHEIGHT);
-            ca.wzmbitmap.setPixels(ca.whitepixels, 0, Constants.WZMWIDTH, x2, posy - 30, diff, 30);
+            for (int i = 1; i <= diff ; i++) {
+                ca.wzmbitmap.setPixels(ca.whitepixels, 0, Constants.WZMWIDTH, x + i, 0, 1, Constants.WZMHEIGHT);
+                ca.wzmbitmap.setPixels(ca.opaquepixels, 0, Constants.WZMWIDTH, x2 + i, 0, 1, Constants.WZMHEIGHT);
+                ca.wzmbitmap.setPixels(ca.whitepixels, 0, Constants.WZMWIDTH, x2 + i, posy - 30, 1, 30);
+                try {
+                    Thread.sleep(30);
+                } catch (InterruptedException ie) {
+                    Log.v("Exception",ie.getMessage());
+                }
+            }
         }
         posx = posxnew;
     }

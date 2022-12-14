@@ -9,10 +9,12 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 
 import de.adv.guimaster.R;
+import de.adv.guimaster.frontend.logic.DataHolder;
 import de.adv.guimaster.frontend.uitools.DimensionDialog;
-import de.adv.guimaster.frontend.logic.Fragmentdata;
 
 public class ZeichenTool extends AppCompatActivity {
+
+    DataHolder holder = DataHolder.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +27,8 @@ public class ZeichenTool extends AppCompatActivity {
 
 
     public void afterDialogClose(){
-        Integer length = Integer.valueOf(Fragmentdata.length);
-        Integer width = Integer.valueOf(Fragmentdata.width);
+        int length = (Integer) holder.retrieve("length");
+        int width = (Integer) holder.retrieve("width");
         int colors = length * width;
         int[] aColors = new int[colors];
         for(int i = 0; i < colors; i++){

@@ -14,29 +14,35 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 import de.adv.guimaster.R;
 import de.adv.guimaster.frontend.activity.MainActivity;
 import de.adv.guimaster.frontend.activity.ZeichenTool;
-import de.adv.guimaster.frontend.logic.Fragmentdata;
+import de.adv.guimaster.frontend.logic.DataHolder;
 
 public class DimensionDialog extends DialogFragment implements View.OnClickListener, View.OnKeyListener {
 
     public ZeichenTool ztool;
+    public String slength = "";
+    public String swidth = "";
 
 
 
     public static DimensionDialog newInstance(ZeichenTool ztool) {
-        DimensionDialog dd = new DimensionDialog();
-        ztool = ztool;
-        return dd;
+        return new DimensionDialog(ztool);
     }
 
+    public DimensionDialog(ZeichenTool ztool){
+        this.ztool = ztool;
+    }
+
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstance){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = getActivity().getLayoutInflater();
+        LayoutInflater inflater = requireActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_dimension, null);
         view.findViewById(R.id.button5).setOnClickListener(this);
         view.findViewById(R.id.button6).setOnClickListener(this);
@@ -57,12 +63,12 @@ public class DimensionDialog extends DialogFragment implements View.OnClickListe
     public void onClick(View v){
         switch (v.getId()){
             case (R.id.button5) :
-                if(Fragmentdata.length != "" && Fragmentdata.width != "") {
+                if(!slength.equals("") && !swidth.equals("")) {
                     this.dismiss();
                     ztool.afterDialogClose();
                     break;
                 } else {
-                    Context context = getActivity().getApplicationContext();
+                    Context context = requireActivity().getApplicationContext();
                     CharSequence text = getString(R.string.values);
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(context, text, duration);
@@ -77,10 +83,13 @@ public class DimensionDialog extends DialogFragment implements View.OnClickListe
 
     @Override
     public boolean onKey(View v, int keyCode, KeyEvent event) {
-                EditText length= v.findViewById(R.id.editTextNumber3);
-                Fragmentdata.length = length.getText().toString();
-                EditText width = v.findViewById(R.id.editTextNumber4);
-                Fragmentdata.width = width.getText().toString();
-                return true;
+        EditText length= v.findViewById(R.id.editTextNumber3);
+        slength = length.getText().toString();
+        EditText width = v.findViewById(R.id.editTextNumber4);
+        swidth = width.getText().toString();
+        DataHolder holder = DataHolder.getInstance();
+        holder.save("Length",slength);
+        holder.save("width",swidth);
+        return true;
     }
 }
