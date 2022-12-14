@@ -1,5 +1,7 @@
 package de.adv.guimaster.frontend.activity;
 
+import static de.adv.guimaster.frontend.logic.Constants.saveLogcatToFile;
+
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -29,6 +31,7 @@ import de.adv.guimaster.frontend.logic.DataHolder;
 
 public class StartupActivity extends AppCompatActivity {
 
+    public DataHolder holder = DataHolder.getInstance();
     public TextView tv;
     public ProgressBar pb;
     public CustomCanvas ca;
@@ -52,10 +55,9 @@ public class StartupActivity extends AppCompatActivity {
         super.onStart();
         progressAnimation();
         ca.start();
-        DataHolder.getInstance().save("CustomCanvas", ca);
-        UsbManager manager = (UsbManager) getSystemService(Context.USB_SERVICE);
-        serialPort = new SerialPort();
-        serialPort.initSerialComm(manager,this);
+        holder.save("CustomCanvas", ca);
+        serialPort = (SerialPort) holder.retrieve("SerialPort");
+        serialPort.initSerialComm(this);
         try{ Thread.sleep(500); } catch (InterruptedException ie) {ie.printStackTrace();}
         saveLogcatToFile(this);
     }
@@ -64,17 +66,6 @@ public class StartupActivity extends AppCompatActivity {
         ProgressBarAnimation barAnimation = new ProgressBarAnimation(this,pb,tv);
         barAnimation.setDuration(5000);
         pb.setAnimation(barAnimation);
-    }
-
-
-    public static void saveLogcatToFile(Context context) {
-        String fileName = "logcat_"+System.currentTimeMillis()+".txt";
-        File outputFile = new File(context.getExternalCacheDir(),fileName);
-        try {
-            Process process = Runtime.getRuntime().exec("logcat -f " + outputFile.getAbsolutePath());
-        } catch (IOException io){
-            io.printStackTrace();
-        }
     }
 
     /*public void initSerialComm(){

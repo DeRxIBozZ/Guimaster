@@ -19,6 +19,9 @@
     <string name="loading.">Lädt.</string>
     <string name="loading..">Lädt..</string>
     <string name="loading...">Lädt...</string>
+    <string name="device_not_attached">USB-Gerät nicht gefunden, bitte erneut versuchen</string>
+    <string name="okay">OK</string>
+    <string name="permission">App benötigt Zugriff auf USB-Gerät, bitte erneut versuchen</string>
 
 
 </resources>

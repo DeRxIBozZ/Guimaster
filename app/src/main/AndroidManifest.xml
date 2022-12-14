@@ -25,8 +25,9 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <activity android:name=".frontend.activity.StartupActivity" />
         <activity
-            android:name=".frontend.activity.StartupActivity"
+            android:name=".frontend.activity.ConnectionActivity"
             android:exported="true"
             android:screenOrientation="landscape">
             <intent-filter>
@@ -40,17 +41,13 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".frontend.activity.MainActivity"
-            android:label="@string/app_name" />
+            android:name=".frontend.activity.MainActivity" />
         <activity
-            android:name=".frontend.activity.LoadingActivity"
-            android:label="@string/app_name" />
+            android:name=".frontend.activity.LoadingActivity" />
         <activity
-            android:name=".frontend.activity.ManuellerController"
-            android:label="@string/app_name" />
+            android:name=".frontend.activity.ManuellerController" />
         <activity
-            android:name=".frontend.activity.ZeichenTool"
-            android:label="@string/app_name" />
+            android:name=".frontend.activity.ZeichenTool" />
     </application>
 
 </manifest>

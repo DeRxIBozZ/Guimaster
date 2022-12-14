@@ -24,12 +24,13 @@ public class SerialPort {
 
     UsbSerialPort usbSerialPort;
     UsbManager manager;
+    UsbDevice device = null;
 
     public SerialPort(UsbManager manager){
         this.manager = manager;
     }
 
-    public boolean requestPermission(Context context){
+    public boolean deviceAttached(Context context){
         List<UsbSerialDriver> availableDrivers = UsbSerialProber.getDefaultProber().findAllDrivers(manager);
         if(availableDrivers.isEmpty()){
             return false;
@@ -40,15 +41,18 @@ public class SerialPort {
             return false;
         }
         Set<String> key = devices.keySet();
-        UsbDevice device = null;
         for(String s: key){
             device = devices.get(s);
         }
-        PendingIntent pi = PendingIntent.getBroadcast(context,0,new Intent("de.adv.guimaster.USB_PERMISSION"),0);
+        return !devices.isEmpty();
+    }
+
+    public void requestPermission(Context context){
+        PendingIntent pi = PendingIntent.getBroadcast(context,0,new Intent(Constants.USB_PERMISSION),0);
         manager.requestPermission(device,pi);
     }
 
-    public void initSerialComm(UsbManager manager, Context context){
+    public void initSerialComm(Context context){
         //UsbManager manager = (UsbManager) getSystemService(Context.USB_SERVICE);
         List<UsbSerialDriver> availableDrivers = UsbSerialProber.getDefaultProber().findAllDrivers(manager);
         if(availableDrivers.isEmpty()){
