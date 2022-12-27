@@ -55,29 +55,15 @@ public class ManuellerController extends AppCompatActivity implements View.OnCli
             x = posx + diff;
             x2 = posxnew - 30;
             diff *= -1;
-            for (int i = 1; i <= diff; i++) {
-                ca.wzmbitmap.setPixels(ca.opaquepixels, 0, Constants.WZMWIDTH, x + diff - i, 0, 1, Constants.WZMHEIGHT);
-                ca.wzmbitmap.setPixels(ca.whitepixels, 0, Constants.WZMWIDTH, x2 + diff - i, 0, 1, Constants.WZMHEIGHT);
-                ca.wzmbitmap.setPixels(ca.whitepixels, 0, Constants.WZMWIDTH, x + diff - i, posy - 30, 1, 30);
-                try {
-                    Thread.sleep(30);
-                } catch (InterruptedException ie) {
-                    Log.v("Exception",ie.getMessage());
-                }
-            }
+            ca.wzmbitmap.setPixels(ca.opaquepixels, 0, Constants.WZMWIDTH, x, 0, diff, Constants.WZMHEIGHT);
+            ca.wzmbitmap.setPixels(ca.whitepixels, 0, Constants.WZMWIDTH, x2, 0, diff, Constants.WZMHEIGHT);
+            ca.wzmbitmap.setPixels(ca.whitepixels, 0, Constants.WZMWIDTH, x, posy - 30, diff, 30);
         } else {
             x = posxnew - diff;
             x2 = posx - 30;
-            for (int i = 1; i <= diff ; i++) {
-                ca.wzmbitmap.setPixels(ca.whitepixels, 0, Constants.WZMWIDTH, x + i, 0, 1, Constants.WZMHEIGHT);
-                ca.wzmbitmap.setPixels(ca.opaquepixels, 0, Constants.WZMWIDTH, x2 + i, 0, 1, Constants.WZMHEIGHT);
-                ca.wzmbitmap.setPixels(ca.whitepixels, 0, Constants.WZMWIDTH, x2 + i, posy - 30, 1, 30);
-                try {
-                    Thread.sleep(30);
-                } catch (InterruptedException ie) {
-                    Log.v("Exception",ie.getMessage());
-                }
-            }
+            ca.wzmbitmap.setPixels(ca.whitepixels, 0, Constants.WZMWIDTH, x, 0, diff, Constants.WZMHEIGHT);
+            ca.wzmbitmap.setPixels(ca.opaquepixels, 0, Constants.WZMWIDTH, x2, 0, diff, Constants.WZMHEIGHT);
+            ca.wzmbitmap.setPixels(ca.whitepixels, 0, Constants.WZMWIDTH, x2, posy - 30, diff, 30);
         }
         posx = posxnew;
     }

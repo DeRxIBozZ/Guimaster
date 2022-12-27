@@ -69,6 +69,7 @@ public class ConnectionActivity extends AppCompatActivity {
     }
 
     public void startApp(){
+        unregisterReceiver(broadcastReceiver);
         Intent i1 = new Intent(ConnectionActivity.this, StartupActivity.class);
         ConnectionActivity.this.startActivity(i1);
     }

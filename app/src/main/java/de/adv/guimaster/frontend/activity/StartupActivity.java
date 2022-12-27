@@ -42,7 +42,6 @@ public class StartupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         try {
             Process clearprocess = Runtime.getRuntime().exec("logcat -c");
-            Thread.sleep(500);
         }catch (Exception e){}
         setContentView(R.layout.activity_startup);
         tv = findViewById(R.id.textView);
@@ -56,8 +55,10 @@ public class StartupActivity extends AppCompatActivity {
         progressAnimation();
         ca.start();
         holder.save("CustomCanvas", ca);
-        serialPort = (SerialPort) holder.retrieve("SerialPort");
-        serialPort.initSerialComm(this);
+        try {
+            serialPort = (SerialPort) holder.retrieve("SerialPort");
+            serialPort.initSerialComm(this);
+        } catch (Exception e) { Log.v("Exception", e.getMessage());}
         try{ Thread.sleep(500); } catch (InterruptedException ie) {ie.printStackTrace();}
         saveLogcatToFile(this);
     }
