@@ -6,4 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".frontend.activity.PictureActivity">
 
+    <Button
+        android:id="@+id/button15"
+        android:layout_width="205dp"
+        android:layout_height="81dp"
+        android:text="Bild hinzufügen"
+        tools:layout_editor_absoluteX="886dp"
+        tools:layout_editor_absoluteY="83dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="1092dp"
+        android:layout_height="666dp"
+        android:layout_gravity="center_horizontal"
+        tools:layout_editor_absoluteX="438dp"
+        tools:layout_editor_absoluteY="252dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
