@@ -1,8 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/button14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create Drawing"
+        tools:layout_editor_absoluteX="1700dp"
+        tools:layout_editor_absoluteY="47dp" />
 
+    <de.adv.guimaster.frontend.uitools.CanvasViewController
+        android:id="@+id/canvasViewController4"
+        android:layout_width="1857dp"
+        android:layout_height="927dp"
+        android:background="@color/anthrazit"
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="123dp" />
+
+    <Spinner
+        android:id="@+id/planets_spinner"
+        android:layout_width="178dp"
+        android:layout_height="55dp"
+        tools:layout_editor_absoluteX="107dp"
+        tools:layout_editor_absoluteY="32dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
