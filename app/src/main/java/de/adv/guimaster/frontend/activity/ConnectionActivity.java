@@ -21,6 +21,7 @@ import de.adv.guimaster.frontend.uitools.PermissionDialog;
 
 public class ConnectionActivity extends AppCompatActivity {
 
+    public int count = 0;
     public DataHolder holder = DataHolder.getInstance();
     public SerialPort serialPort;
     public final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
@@ -55,9 +56,13 @@ public class ConnectionActivity extends AppCompatActivity {
     public void attachDevice(){
         if(serialPort.deviceAttached(this)){
             initConnection();
+        } else if(count == 3) {
+            Intent i1 = new Intent(ConnectionActivity.this, StartupActivity.class);
+            ConnectionActivity.this.startActivity(i1);
         } else {
             DialogFragment newFragment = ConnectionDialog.newInstance(this);
             newFragment.show(getSupportFragmentManager(),"dialog");
+            count++;
         }
     }
 
