@@ -2,9 +2,9 @@ package de.adv.guimaster.frontend.activity;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -12,29 +12,26 @@ import androidx.fragment.app.DialogFragment;
 
 import de.adv.guimaster.R;
 import de.adv.guimaster.frontend.logic.DataHolder;
+import de.adv.guimaster.frontend.uitools.CanvasViewController;
 import de.adv.guimaster.frontend.uitools.DimensionDialog;
-import de.adv.guimaster.frontend.uitools.DrawingCanvas;
 
 public class ZeichenTool extends AppCompatActivity {
 
     DataHolder holder = DataHolder.getInstance();
-    DrawingCanvas drawingCanvas;
+    Spinner spinner;
+    Button btn;
+    CanvasViewController canvasViewController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.zeichentool);
-        /*drawingCanvas = findViewById(R.id.drawingCanvas);
-        drawingCanvas.paint.setAntiAlias(true);
-        drawingCanvas.paint.setDither(true);
-        drawingCanvas.paint.setColor(Color.WHITE);
-        drawingCanvas.paint.setStyle(Paint.Style.STROKE);
-        drawingCanvas.paint.setStrokeJoin(Paint.Join.ROUND);
-        drawingCanvas.paint.setStrokeCap(Paint.Cap.ROUND);
-        drawingCanvas.paint.setStrokeWidth(12);*/
         DialogFragment newFragment = DimensionDialog.newInstance(this);
         newFragment.show(getSupportFragmentManager(),"dialog");
 
+        spinner = (Spinner) findViewById(R.id.planets_spinner);
+        btn = (Button) findViewById(R.id.button14);
+        canvasViewController = (CanvasViewController) findViewById(R.id.canvasViewController4);
     }
 
 
