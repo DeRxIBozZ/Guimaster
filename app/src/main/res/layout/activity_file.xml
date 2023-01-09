@@ -6,4 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".frontend.activity.FileActivity">
 
+    <Button
+        android:id="@+id/button16"
+        android:layout_width="174dp"
+        android:layout_height="106dp"
+        android:text="Button"
+        tools:layout_editor_absoluteX="873dp"
+        tools:layout_editor_absoluteY="92dp" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="1092dp"
+        android:layout_height="666dp"
+        android:layout_gravity="center_horizontal"
+        tools:layout_editor_absoluteX="438dp"
+        tools:layout_editor_absoluteY="252dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
