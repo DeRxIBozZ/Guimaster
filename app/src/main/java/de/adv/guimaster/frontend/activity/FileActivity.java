@@ -15,6 +15,9 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.larvalabs.svgandroid.SVG;
+import com.larvalabs.svgandroid.SVGParser;
+
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
@@ -33,12 +36,11 @@ public class FileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file);
-
         iv = (ImageView) findViewById(R.id.imageView2);
         btn = (Button) findViewById(R.id.button16);
         btn.setOnClickListener(v -> {
             intent1 = new Intent(Intent.ACTION_GET_CONTENT);
-            intent1.setType("document/svg");
+            intent1.setType("image/svg+xml");
             someActivityResultLauncher.launch(intent1);
         });
 

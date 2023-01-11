@@ -5,27 +5,59 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <de.adv.guimaster.frontend.uitools.DrawingCanvas
+        android:id="@+id/viewDraw"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/erase"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <SeekBar
+        android:id="@+id/thickness"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/viewDraw"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/erase"
+        app:layout_constraintStart_toEndOf="@+id/draw" />
+
     <Button
-        android:id="@+id/button14"
+        android:id="@+id/erase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create Drawing"
-        tools:layout_editor_absoluteX="1700dp"
-        tools:layout_editor_absoluteY="47dp" />
+        android:layout_below="@+id/thickness"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#FFFFFF"
+        android:text="@string/erase"
+        android:textColor="#000000"
+        app:icon="@drawable/eraser_svgrepo_com"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <de.adv.guimaster.frontend.uitools.CanvasViewController
-        android:id="@+id/canvasViewController4"
-        android:layout_width="1857dp"
-        android:layout_height="927dp"
-        android:background="@color/anthrazit"
-        tools:layout_editor_absoluteX="36dp"
-        tools:layout_editor_absoluteY="123dp" />
+    <Button
+        android:id="@+id/draw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/erase"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#FFFFFF"
+        android:text="@string/draw"
+        android:textColor="#000000"
+        app:icon="@drawable/pencil_svgrepo_com"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <Spinner
-        android:id="@+id/planets_spinner"
-        android:layout_width="178dp"
-        android:layout_height="55dp"
-        tools:layout_editor_absoluteX="107dp"
-        tools:layout_editor_absoluteY="32dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

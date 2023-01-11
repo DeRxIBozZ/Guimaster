@@ -2,9 +2,13 @@ package de.adv.guimaster.frontend.activity;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.View;
 import android.widget.Button;
-import android.widget.Spinner;
+import android.widget.SeekBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -12,26 +16,78 @@ import androidx.fragment.app.DialogFragment;
 
 import de.adv.guimaster.R;
 import de.adv.guimaster.frontend.logic.DataHolder;
-import de.adv.guimaster.frontend.uitools.CanvasViewController;
 import de.adv.guimaster.frontend.uitools.DimensionDialog;
+import de.adv.guimaster.frontend.uitools.DrawingCanvas;
 
 public class ZeichenTool extends AppCompatActivity {
 
     DataHolder holder = DataHolder.getInstance();
-    Spinner spinner;
-    Button btn;
-    CanvasViewController canvasViewController;
+    SeekBar mThickness;
+    private DrawingCanvas mDrawLayout;
+    Button erase, draw;
+    private Paint drawPaint = new Paint();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.zeichentool);
-        DialogFragment newFragment = DimensionDialog.newInstance(this);
-        newFragment.show(getSupportFragmentManager(),"dialog");
+        mThickness = (SeekBar) findViewById(R.id.thickness);
+        mDrawLayout = (DrawingCanvas) findViewById(R.id.viewDraw);
+        erase = (Button) findViewById(R.id.erase);
+        draw= (Button) findViewById(R.id.draw);
 
-        spinner = (Spinner) findViewById(R.id.planets_spinner);
-        btn = (Button) findViewById(R.id.button14);
-        canvasViewController = (CanvasViewController) findViewById(R.id.canvasViewController4);
+        mDrawLayout.setVisibility(View.VISIBLE);
+        //mDrawLayout.setDrawingCacheEnabled(true);
+        mDrawLayout.setEnabled(true);
+        mThickness.setMax(50);
+        mThickness.setProgress(10);
+        mDrawLayout.setPaintAlpha(mThickness.getProgress());
+        int currLevel = mDrawLayout.getPaintAlpha();
+        mThickness.setProgress(currLevel);
+        mDrawLayout.invalidate();
+
+        erase.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                drawPaint.setColor(Color.TRANSPARENT);
+                mDrawLayout.setErase(true);
+
+            }
+        });
+
+        draw.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                mDrawLayout.setErase(false);
+
+            }
+        });
+
+        mThickness.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress,
+                                          boolean fromUser) {
+                mDrawLayout.setPaintAlpha(mThickness.getProgress());
+            }
+        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        //getMenuInflater().inflate(R.menu.main, menu);
+        return true;
     }
 
 
