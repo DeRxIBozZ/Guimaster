@@ -5,39 +5,47 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
-import com.larvalabs.svgandroid.SVG;
-import com.larvalabs.svgandroid.SVGParser;
+import com.caverock.androidsvg.SVG;
+import com.caverock.androidsvg.SVGImageView;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-
 import de.adv.guimaster.R;
 
 public class FileActivity extends AppCompatActivity {
 
-    ImageView iv;
+    SVGImageView svgView;
     Button btn;
     Intent intent1;
     Uri bilduri;
     Bitmap bm;
     InputStream is;
+    SVG svg;
+    Context c;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file);
-        iv = (ImageView) findViewById(R.id.imageView2);
-        btn = (Button) findViewById(R.id.button16);
+        svgView =  findViewById(R.id.svgView);
+        btn = findViewById(R.id.button16);
+        c = this;
         btn.setOnClickListener(v -> {
             intent1 = new Intent(Intent.ACTION_GET_CONTENT);
             intent1.setType("image/svg+xml");
@@ -57,9 +65,9 @@ public class FileActivity extends AppCompatActivity {
                         bilduri = data.getData();
                         try {
                             is = getContentResolver().openInputStream(bilduri);
-                            bm = BitmapFactory.decodeStream(is);
-                            iv.setImageBitmap(bm);
-                        } catch (FileNotFoundException e) {
+                            svg = SVG.getFromInputStream(is);
+                            svgView.setSVG(svg);
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }

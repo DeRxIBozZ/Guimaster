@@ -1,11 +1,18 @@
 package de.adv.guimaster.frontend.logic;
 
+import android.provider.ContactsContract;
+
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 
 public class DataHolder {
-    public Map<String, WeakReference<Object>> data = new HashMap<>();
+
+    private DataHolder(){
+        data = new HashMap<>();
+    }
+
+    private Map<String, WeakReference<Object>> data;
 
     public void save(String id, Object object){
         data.put(id, new WeakReference<>(object));
@@ -16,6 +23,6 @@ public class DataHolder {
         return objectWeakReference.get();
     }
 
-    public static final DataHolder holder = new DataHolder();
+    private static final DataHolder holder = new DataHolder();
     public static DataHolder getInstance() { return holder;}
 }

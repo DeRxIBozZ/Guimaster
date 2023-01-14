@@ -57,9 +57,6 @@ public class PictureActivity extends AppCompatActivity {
                         // There are no request codes
                         Intent data = result.getData();
                         bilduri = data.getData();
-                        String uristring = bilduri.toString();
-                        TextView tv = findViewById(R.id.textView3);
-                        tv.setText(uristring);
                         try {
                             is = getContentResolver().openInputStream(bilduri);
                             bm = BitmapFactory.decodeStream(is);
