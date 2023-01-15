@@ -10,9 +10,10 @@
         android:id="@+id/button16"
         android:layout_width="174dp"
         android:layout_height="106dp"
-        android:text="Button"
+        android:text="SVG hinzufügen"
         tools:layout_editor_absoluteX="873dp"
-        tools:layout_editor_absoluteY="92dp" />
+        tools:layout_editor_absoluteY="92dp"
+        tools:ignore="MissingConstraints" />
 
     <com.caverock.androidsvg.SVGImageView
         android:id="@+id/svgView"
@@ -22,5 +23,6 @@
         android:layout_marginStart="32dp"
         android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingClass" />
 </androidx.constraintlayout.widget.ConstraintLayout>

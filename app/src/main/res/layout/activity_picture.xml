@@ -11,15 +11,19 @@
         android:layout_width="205dp"
         android:layout_height="81dp"
         android:text="Bild hinzufügen"
-        tools:layout_editor_absoluteX="886dp"
-        tools:layout_editor_absoluteY="83dp" />
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="1092dp"
         android:layout_height="666dp"
         android:layout_gravity="center_horizontal"
-        tools:layout_editor_absoluteX="438dp"
-        tools:layout_editor_absoluteY="252dp" />
+        android:layout_marginBottom="112dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
