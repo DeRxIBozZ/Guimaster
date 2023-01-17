@@ -10,7 +10,7 @@
         android:id="@+id/button16"
         android:layout_width="174dp"
         android:layout_height="106dp"
-        android:layout_marginTop="216dp"
+        android:layout_marginTop="144dp"
         android:text="SVG hinzufügen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
