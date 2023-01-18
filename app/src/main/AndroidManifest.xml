@@ -48,8 +48,6 @@
         <activity
             android:name=".frontend.activity.MainActivity" />
         <activity
-            android:name=".frontend.activity.LoadingActivity" />
-        <activity
             android:name=".frontend.activity.ManuellerController" />
         <activity
             android:name=".frontend.activity.ZeichenTool" />

@@ -5,6 +5,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -40,6 +42,8 @@ public class PictureActivity extends AppCompatActivity {
 
         iv = (ImageView) findViewById(R.id.imageView);
         btn = (Button) findViewById(R.id.button15);
+        View root = btn.getRootView();
+        root.setBackgroundColor(ContextCompat.getColor(this,R.color.anthrazit));
         btn.setOnClickListener(v -> {
             intent1 = new Intent(Intent.ACTION_GET_CONTENT);
             intent1.setType("image/*");

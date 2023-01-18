@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.SeekBar;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 
@@ -32,6 +33,8 @@ public class ZeichenTool extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.zeichentool);
         mThickness = (SeekBar) findViewById(R.id.thickness);
+        View root = mThickness.getRootView();
+        root.setBackgroundColor(ContextCompat.getColor(this,R.color.anthrazit));
         mDrawLayout = (DrawingCanvas) findViewById(R.id.viewDraw);
         erase = (Button) findViewById(R.id.erase);
         draw= (Button) findViewById(R.id.draw);

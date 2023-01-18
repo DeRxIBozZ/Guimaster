@@ -8,8 +8,11 @@ import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import de.adv.guimaster.R;
 import de.adv.guimaster.api.SerialPort;
@@ -44,11 +47,13 @@ public class ConnectionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_connection);
+        ImageView iv = findViewById(R.id.imageView3);
+        View root = iv.getRootView();
+        root.setBackgroundColor(ContextCompat.getColor(this,R.color.anthrazit));
         UsbManager manager = (UsbManager) getSystemService(Context.USB_SERVICE);
         serialPort = new SerialPort(manager);
         holder.save("SerialPort",serialPort);
         holder.save("ConnectionActivity",this);
-        holder.save("BroadcastReceiver",broadcastReceiver);
         attachDevice();
     }
 

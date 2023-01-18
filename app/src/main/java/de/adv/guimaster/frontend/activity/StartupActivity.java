@@ -10,10 +10,13 @@ import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import com.hoho.android.usbserial.driver.UsbSerialDriver;
 import com.hoho.android.usbserial.driver.UsbSerialPort;
 import com.hoho.android.usbserial.driver.UsbSerialProber;
@@ -24,6 +27,7 @@ import java.util.List;
 import java.util.Set;
 import de.adv.guimaster.R;
 import de.adv.guimaster.api.SerialPort;
+import de.adv.guimaster.backend.CncState;
 import de.adv.guimaster.frontend.uitools.ProgressBarAnimation;
 import de.adv.guimaster.frontend.logic.Constants;
 import de.adv.guimaster.frontend.logic.CustomCanvas;
@@ -39,12 +43,12 @@ public class StartupActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        CncState.CNC_CONNECTION = (SerialPort) holder.retrieve("SerialPort");
         super.onCreate(savedInstanceState);
-        try {
-            Process clearprocess = Runtime.getRuntime().exec("logcat -c");
-        }catch (Exception e){}
         setContentView(R.layout.activity_startup);
         tv = findViewById(R.id.textView);
+        View root = tv.getRootView();
+        root.setBackgroundColor(ContextCompat.getColor(this,R.color.anthrazit));
         pb = findViewById(R.id.progressBar3);
         ca = new CustomCanvas();
     }

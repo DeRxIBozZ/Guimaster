@@ -10,7 +10,7 @@
         android:id="@+id/button15"
         android:layout_width="205dp"
         android:layout_height="81dp"
-        android:text="Bild hinzufügen"
+        android:text="@string/addpicture"
         android:backgroundTint="#FFFFFF"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"

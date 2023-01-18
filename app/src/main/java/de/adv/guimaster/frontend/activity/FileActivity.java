@@ -5,6 +5,8 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -45,6 +47,8 @@ public class FileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_file);
         svgView =  findViewById(R.id.svgView);
         btn = findViewById(R.id.button16);
+        View root = btn.getRootView();
+        root.setBackgroundColor(ContextCompat.getColor(this,R.color.anthrazit));
         c = this;
         btn.setOnClickListener(v -> {
             intent1 = new Intent(Intent.ACTION_GET_CONTENT);

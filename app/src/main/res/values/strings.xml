@@ -1,4 +1,12 @@
 <resources>
+    <string-array name="comboitems">
+        <item>0,001</item>
+        <item>0,01</item>
+        <item>0,1</item>
+        <item>1</item>
+        <item>10</item>
+        <item>100</item>
+    </string-array>
     <string name="app_name">Guimaster</string>
     <string name="parentView">parentView</string>
     <string name="bcontroller">Manuelle Ansteuerung</string>
@@ -24,6 +32,9 @@
     <string name="permission">App benötigt Zugriff auf USB-Gerät, bitte erneut versuchen</string>
     <string name="draw">Zeichnen</string>
     <string name="erase">Radieren</string>
-
+    <string name="addpicture">Bild hinzufügen</string>
+    <string name="toolswitch">Tool an/aus</string>
+    <string name="stepwidth">Schrittweite in mm</string>
+    <string name="steptoolon">Schrittweite ist während Benutzung des Tools auf 1mm begrenzt</string>
 
 </resources>
