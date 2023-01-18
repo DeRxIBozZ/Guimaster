@@ -11,6 +11,8 @@
         android:layout_width="205dp"
         android:layout_height="81dp"
         android:text="Bild hinzufügen"
+        android:backgroundTint="#FFFFFF"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
