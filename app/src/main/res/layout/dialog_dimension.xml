@@ -18,6 +18,7 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="4dp"
             android:onClick="onSubmit"
+            android:backgroundTint="#FFFFFF"
             android:text="@string/ok"
             android:textColor="#000000"
             app:layout_constraintEnd_toEndOf="parent"
@@ -30,6 +31,7 @@
             android:layout_marginStart="64dp"
             android:layout_marginTop="50dp"
             android:text="@string/width"
+            android:textColor="#FFFFFF"
             android:textSize="24dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView10" />
@@ -41,6 +43,7 @@
             android:layout_marginStart="64dp"
             android:layout_marginTop="50dp"
             android:text="@string/length"
+            android:textColor="#FFFFFF"
             android:textSize="24dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
@@ -51,6 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="64dp"
             android:text="@string/dimension_fragment"
+            android:textColor="#FFFFFF"
             android:textSize="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -63,6 +67,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="50dp"
             android:ems="10"
+            android:textColor="#FFFFFF"
             android:inputType="number"
             app:layout_constraintStart_toEndOf="@+id/textView10"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
@@ -74,6 +79,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="50dp"
             android:ems="10"
+            android:textColor="#FFFFFF"
             android:inputType="number"
             app:layout_constraintStart_toEndOf="@+id/textView11"
             app:layout_constraintTop_toBottomOf="@+id/textView10" />
@@ -86,6 +92,7 @@
             android:layout_marginEnd="32dp"
             android:onClick="onBack"
             android:text="@string/back"
+            android:backgroundTint="#FFFFFF"
             android:textColor="#000000"
             app:layout_constraintEnd_toStartOf="@+id/button5"
             app:layout_constraintTop_toBottomOf="@+id/editTextNumber4" />
