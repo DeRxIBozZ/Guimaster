@@ -30,6 +30,7 @@ public class PictureActivity extends AppCompatActivity {
 
     ImageView iv;
     Button btn;
+    Button btnBack;
     Intent intent1;
     Uri bilduri;
     Bitmap bm;
@@ -43,6 +44,11 @@ public class PictureActivity extends AppCompatActivity {
         iv = (ImageView) findViewById(R.id.imageView);
         btn = (Button) findViewById(R.id.button15);
         View root = btn.getRootView();
+        btnBack = (Button) findViewById(R.id.button18);
+        btnBack.setOnClickListener(v -> {
+            Intent i1 = new Intent(PictureActivity.this,MainActivity.class);
+            PictureActivity.this.startActivity(i1);
+        });
         root.setBackgroundColor(ContextCompat.getColor(this,R.color.anthrazit));
         btn.setOnClickListener(v -> {
             intent1 = new Intent(Intent.ACTION_GET_CONTENT);
