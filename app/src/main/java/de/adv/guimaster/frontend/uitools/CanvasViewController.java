@@ -4,26 +4,28 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
 
 public class CanvasViewController extends View {
 
-    public Bitmap bitmap;
+    private Bitmap bitmap;
 
 
     public CanvasViewController(Context context, @Nullable AttributeSet attrs, int defStyleAttr){
         super(context, attrs, defStyleAttr);
+
     }
 
-    public CanvasViewController(Context context,@Nullable AttributeSet attrs){
+    public CanvasViewController(Context context, @Nullable AttributeSet attrs){
         super(context, attrs);
     }
 
     public void setBitmap(Bitmap bitmap){
+
         this.bitmap = bitmap;
+        this.invalidate();
     }
 
 
@@ -34,6 +36,7 @@ public class CanvasViewController extends View {
         }
         super.onDraw(canvas);
     }
+
 
 }
 

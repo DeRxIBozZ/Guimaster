@@ -1,6 +1,7 @@
 package de.adv.guimaster.frontend.logic;
 
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 
 public class CustomCanvas extends Thread {
     public Bitmap wzmbitmap;
@@ -11,13 +12,12 @@ public class CustomCanvas extends Thread {
     public int[][] depthmatrix;
     public int[] silverpixels;
 
-
     @Override
     public void run() {
         machinematrix = new int[Constants.WZMWIDTH][Constants.WZMHEIGHT];
         for (int i = 0; i < Constants.WZMWIDTH; i++) {
             for (int j = 0; j < Constants.WZMHEIGHT; j++) {
-                if (j >= (Constants.WZMHEIGHT - 30) || i >= (Constants.WZMWIDTH - 30)) {
+                if (j < 30 || i >= (Constants.WZMWIDTH - 30)) {
                     machinematrix[i][j] = android.graphics.Color.argb(255, 255, 255, 255);
                 } else {
                     machinematrix[i][j] = android.graphics.Color.argb(0, 0, 0, 0);
@@ -58,5 +58,6 @@ public class CustomCanvas extends Thread {
         }
         Bitmap bitmap1 = Bitmap.createBitmap(MatrixArray.toArray(depthmatrix), Constants.DEPTHWIDTH, Constants.DEPTHHEIGHT, Bitmap.Config.ARGB_8888);
         depthbitmap = bitmap1.copy(Bitmap.Config.ARGB_8888,true);
+
     }
 }

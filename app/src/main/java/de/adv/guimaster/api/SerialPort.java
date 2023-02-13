@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
+import de.adv.guimaster.backend.Instructions;
 import de.adv.guimaster.frontend.logic.Constants;
 
 public class SerialPort {
@@ -25,6 +26,7 @@ public class SerialPort {
     UsbSerialPort usbSerialPort;
     UsbManager manager;
     UsbDevice device = null;
+    Instructions instructions = new Instructions();
 
     public SerialPort(UsbManager manager){
         this.manager = manager;
@@ -88,6 +90,14 @@ public class SerialPort {
         } catch (IOException ioException){
             //Toast toast = Toast.makeText(this,ioException.getMessage(),Toast.LENGTH_LONG);
             //toast.show()
+        }
+    }
+
+    public void moveAxis(String axis, int micrometers){
+        try{
+            instructions.moveAxis(axis,micrometers);
+        } catch (Exception e){
+            Log.v("Serial Exception", "move Axis error");
         }
     }
 

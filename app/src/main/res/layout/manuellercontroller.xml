@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/combobox"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:foregroundTint="#FFFFFF">
 
 
     <Button
@@ -185,8 +186,8 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         android:minHeight="48dp"
-        android:textColor="#FFFFFF"
         android:text="@string/toolswitch"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/spinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline4" />
@@ -198,8 +199,8 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="24dp"
         android:contentDescription="@string/stepwidth"
-        android:textColor="#FFFFFF"
         android:minHeight="48dp"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/button11"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
