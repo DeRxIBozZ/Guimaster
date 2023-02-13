@@ -33,6 +33,7 @@ public class FileActivity extends AppCompatActivity {
 
     SVGImageView svgView;
     Button btn;
+    Button btnBack;
     Intent intent1;
     Uri bilduri;
     Bitmap bm;
@@ -48,6 +49,11 @@ public class FileActivity extends AppCompatActivity {
         svgView =  findViewById(R.id.svgView);
         btn = findViewById(R.id.button16);
         View root = btn.getRootView();
+        btnBack = (Button) findViewById(R.id.button14);
+        btnBack.setOnClickListener(v -> {
+            Intent i1 = new Intent(FileActivity.this,MainActivity.class);
+            FileActivity.this.startActivity(i1);
+        });
         root.setBackgroundColor(ContextCompat.getColor(this,R.color.anthrazit));
         c = this;
         btn.setOnClickListener(v -> {
