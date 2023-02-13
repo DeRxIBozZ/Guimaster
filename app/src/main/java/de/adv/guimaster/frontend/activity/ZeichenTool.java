@@ -15,7 +15,10 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 
+import java.io.OutputStream;
+
 import de.adv.guimaster.R;
+import de.adv.guimaster.api.ConvertBitmaptoPNG;
 import de.adv.guimaster.frontend.logic.DataHolder;
 import de.adv.guimaster.frontend.uitools.DimensionDialog;
 import de.adv.guimaster.frontend.uitools.DrawingCanvas;
@@ -27,6 +30,8 @@ public class ZeichenTool extends AppCompatActivity {
     private DrawingCanvas mDrawLayout;
     Button erase, draw;
     private Paint drawPaint = new Paint();
+    int quality;
+    OutputStream outstream;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +89,10 @@ public class ZeichenTool extends AppCompatActivity {
                 mDrawLayout.setPaintAlpha(mThickness.getProgress());
             }
         });
+
+
+        Bitmap bitmap =  ConvertBitmaptoPNG.getBitmap(this, R.id.imageView);
+        ConvertBitmaptoPNG.compressBitmap(bitmap,quality,outstream);
     }
 
     @Override

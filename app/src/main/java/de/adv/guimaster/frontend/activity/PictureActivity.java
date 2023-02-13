@@ -23,18 +23,23 @@ import org.w3c.dom.Text;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 import de.adv.guimaster.R;
+import de.adv.guimaster.api.ConvertBitmaptoPNG;
 
 public class PictureActivity extends AppCompatActivity {
 
     ImageView iv;
     Button btn;
     Button btnBack;
+    Button btnMillONPlate;
     Intent intent1;
     Uri bilduri;
     Bitmap bm;
     InputStream is;
+    int quality;
+    OutputStream outstream;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +50,7 @@ public class PictureActivity extends AppCompatActivity {
         btn = (Button) findViewById(R.id.button15);
         View root = btn.getRootView();
         btnBack = (Button) findViewById(R.id.button18);
+        btnMillONPlate = findViewById(R.id.button19);
         btnBack.setOnClickListener(v -> {
             Intent i1 = new Intent(PictureActivity.this,MainActivity.class);
             PictureActivity.this.startActivity(i1);
@@ -55,7 +61,10 @@ public class PictureActivity extends AppCompatActivity {
             intent1.setType("image/*");
             someActivityResultLauncher.launch(intent1);
         });
-
+        btnMillONPlate.setOnClickListener(v -> {
+            Bitmap bitmap =  ConvertBitmaptoPNG.getBitmap(this, R.id.imageView);
+            ConvertBitmaptoPNG.compressBitmap(bitmap,quality,outstream);
+        });
     }
 
     protected ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(

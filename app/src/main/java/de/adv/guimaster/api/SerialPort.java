@@ -13,6 +13,7 @@ import com.hoho.android.usbserial.driver.UsbSerialDriver;
 import com.hoho.android.usbserial.driver.UsbSerialPort;
 import com.hoho.android.usbserial.driver.UsbSerialProber;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +27,7 @@ public class SerialPort {
     UsbSerialPort usbSerialPort;
     UsbManager manager;
     UsbDevice device = null;
+    static File file;
     Instructions instructions = new Instructions();
 
     public SerialPort(UsbManager manager){
