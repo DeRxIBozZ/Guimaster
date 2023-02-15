@@ -30,6 +30,9 @@ public class DrawingCanvas extends View {
     private Bitmap canvasBitmap;
     //eraser mode
     private boolean erase=false;
+    private Forms forms = Forms.FreeForm;
+    float startX;
+    float startY;
 
     //constructor
     public DrawingCanvas(Context context, AttributeSet attrs){
@@ -87,6 +90,9 @@ public class DrawingCanvas extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        drawPaint.setStyle(Paint.Style.STROKE);
+        drawPaint.setColor(Color.GREEN);
+        drawPaint.setStrokeWidth(5);
         canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
         canvas.drawPath(drawPath, drawPaint);
     }
@@ -104,13 +110,37 @@ public class DrawingCanvas extends View {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 drawPath.moveTo(touchX, touchY);
+                startX = touchX;
+                startY = touchY;
                 break;
             case MotionEvent.ACTION_MOVE:
-                drawCanvas.drawPath(drawPath, drawPaint);
-                drawPath.lineTo(touchX, touchY);
+                switch (forms) {
+                    case FreeForm:
+                        drawCanvas.drawPath(drawPath, drawPaint);
+                        drawPath.lineTo(touchX, touchY);
+                        break;
+                    case Line:
+                        drawPath.reset();
+                        drawPath.moveTo(startX, startY);
+                        drawPath.lineTo(touchX, touchY);
+                        break;
+                    case Rect:
+                        drawPath.reset();
+                        drawPath.moveTo(startX, startY);
+                        drawPath.addRect(startX, startY, touchX, touchY, Path.Direction.CW);
+                        break;
+                    case Circle:
+                        drawPath.reset();
+                        drawPath.moveTo(startX, startY);
+                        drawPath.addCircle(startX, startY, calcRadius(startX, startY, touchX,touchY), Path.Direction.CW);
+                        break;
+                }
+
                 break;
             case MotionEvent.ACTION_UP:
-                drawPath.lineTo(touchX, touchY);
+                if(forms == Forms.FreeForm) {
+                    drawPath.lineTo(touchX, touchY);
+                }
                 drawCanvas.drawPath(drawPath, drawPaint);
                 drawPath.reset();
                 break;
@@ -120,6 +150,15 @@ public class DrawingCanvas extends View {
         //redraw
         invalidate();
         return true;
+    }
+
+    public float calcRadius(float x, float y, float endX, float endY) {
+        float length = Math.abs(x-endX);
+        float width = Math.abs(y-endY);
+        return (float) Math.sqrt((length*length)+(width*width));
+    }
+    public void setForms(Forms forms) {
+        this.forms = forms;
     }
 
     //***********************************   return current alpha   ***********************************************

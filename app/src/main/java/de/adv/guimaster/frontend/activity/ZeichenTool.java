@@ -20,13 +20,14 @@ import de.adv.guimaster.R;
 import de.adv.guimaster.frontend.logic.DataHolder;
 import de.adv.guimaster.frontend.logic.DrawingView;
 import de.adv.guimaster.frontend.uitools.DrawingCanvas;
+import de.adv.guimaster.frontend.uitools.Forms;
 
 public class ZeichenTool extends AppCompatActivity {
 
     DataHolder holder = DataHolder.getInstance();
     SeekBar mThickness;
     private DrawingCanvas mDrawLayout;
-    Button erase, draw;
+    Button erase;
     private Paint drawPaint = new Paint();
     int quality;
     OutputStream outstream;
@@ -43,10 +44,18 @@ public class ZeichenTool extends AppCompatActivity {
         root.setBackgroundColor(ContextCompat.getColor(this,R.color.anthrazit));
         mDrawLayout = (DrawingCanvas) findViewById(R.id.viewDraw);
         erase = (Button) findViewById(R.id.erase);
-        draw= (Button) findViewById(R.id.draw);
-        Button drawRec = findViewById(R.id.buttonRec);
-        Button drawLine = findViewById(R.id.buttonLine);
-        Button drawCircle = findViewById(R.id.buttonCircle);
+        findViewById(R.id.draw).setOnClickListener(v -> {
+            mDrawLayout.setForms(Forms.FreeForm);
+        });
+        findViewById(R.id.buttonRec).setOnClickListener(v -> {
+            mDrawLayout.setForms(Forms.Rect);
+        });
+        findViewById(R.id.buttonLine).setOnClickListener(v -> {
+            mDrawLayout.setForms(Forms.Line);
+        });
+        findViewById(R.id.buttonCircle).setOnClickListener(v -> {
+            mDrawLayout.setForms(Forms.Circle);
+        });
 
         mDrawLayout.setVisibility(View.VISIBLE);
         //mDrawLayout.setDrawingCacheEnabled(true);
@@ -68,26 +77,14 @@ public class ZeichenTool extends AppCompatActivity {
             }
         });
 
-        draw.setOnClickListener(new View.OnClickListener() {
+//        draw.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                mDrawLayout.setErase(false);
+//            @Override
+//            public void onClick(View v) {
+//                mDrawLayout.setErase(false);
 
-            }
-        });
-        final DrawingView view = new DrawingView(this);
-
-//        if(onTouchEvent(drawRec)) {
-//            view.setOnTouchListener(new View.OnTouchListener() {
-//                @Override
-//                public boolean onTouch(View v, MotionEvent motionEvent) {
-//                    view.setPos(motionEvent.getX(), motionEvent.getY());
-//                        invalidate();
-//                    return true;
-//                }
-//            });
-//        }
+//            }
+//        });
 
 
         mThickness.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
