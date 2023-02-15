@@ -7,10 +7,10 @@ import java.io.File;
 import java.io.IOException;
 
 public class Constants {
-    public static final int WZMWIDTH = 1600;
-    public static final int WZMHEIGHT = 950;
+    public static final int WZMWIDTH = 1430;
+    public static final int WZMHEIGHT = 1300;
     public static final int DEPTHWIDTH = 300;
-    public static final int DEPTHHEIGHT = 950;
+    public static final int DEPTHHEIGHT = 1300;
     public static final int WRITE_WAIT_MILLIS = 100;
     public static final String USB_PERMISSION = "de.adv.guimaster.USB_PERMISSION";
     public static void saveLogcatToFile(Context context) {
