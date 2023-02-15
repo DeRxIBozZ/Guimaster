@@ -120,7 +120,7 @@
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <Button
-                android:id="@+id/button23"
+                android:id="@+id/buttonCircle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="false"
@@ -130,14 +130,14 @@
                 android:backgroundTint="#FFFFFF"
                 android:textAlignment="center"
                 android:textColor="#000000"
-                app:icon="@drawable/eraser_svgrepo_com"
+                app:icon="@drawable/circle_empty_geometry_container_round_svgrepo_com"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/button22"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <Button
-                android:id="@+id/button24"
+                android:id="@+id/buttonRec"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="false"
@@ -147,14 +147,14 @@
                 android:backgroundTint="#FFFFFF"
                 android:textAlignment="center"
                 android:textColor="#000000"
-                app:icon="@drawable/eraser_svgrepo_com"
+                app:icon="@drawable/rectangle__plain_"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/button23"
+                app:layout_constraintEnd_toStartOf="@id/buttonCircle"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <Button
-                android:id="@+id/button25"
+                android:id="@+id/buttonLine"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="false"
@@ -164,12 +164,11 @@
                 android:backgroundTint="#FFFFFF"
                 android:textAlignment="center"
                 android:textColor="#000000"
-                app:icon="@drawable/pencil_svgrepo_com"
+                app:icon="@drawable/line_svgrepo_com"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/button24"
+                app:layout_constraintEnd_toStartOf="@id/buttonRec"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="SpeakableTextPresentCheck" />
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

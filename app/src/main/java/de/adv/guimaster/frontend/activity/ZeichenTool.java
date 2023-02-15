@@ -12,16 +12,13 @@ import android.widget.SeekBar;
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.DialogFragment;
 
 import java.io.OutputStream;
 
 import de.adv.guimaster.R;
-import de.adv.guimaster.api.ConvertBitmaptoPNG;
 import de.adv.guimaster.frontend.logic.DataHolder;
-import de.adv.guimaster.frontend.uitools.DimensionDialog;
+import de.adv.guimaster.frontend.logic.DrawingView;
 import de.adv.guimaster.frontend.uitools.DrawingCanvas;
 
 public class ZeichenTool extends AppCompatActivity {
@@ -47,6 +44,9 @@ public class ZeichenTool extends AppCompatActivity {
         mDrawLayout = (DrawingCanvas) findViewById(R.id.viewDraw);
         erase = (Button) findViewById(R.id.erase);
         draw= (Button) findViewById(R.id.draw);
+        Button drawRec = findViewById(R.id.buttonRec);
+        Button drawLine = findViewById(R.id.buttonLine);
+        Button drawCircle = findViewById(R.id.buttonCircle);
 
         mDrawLayout.setVisibility(View.VISIBLE);
         //mDrawLayout.setDrawingCacheEnabled(true);
@@ -76,6 +76,19 @@ public class ZeichenTool extends AppCompatActivity {
 
             }
         });
+        final DrawingView view = new DrawingView(this);
+
+//        if(onTouchEvent(drawRec)) {
+//            view.setOnTouchListener(new View.OnTouchListener() {
+//                @Override
+//                public boolean onTouch(View v, MotionEvent motionEvent) {
+//                    view.setPos(motionEvent.getX(), motionEvent.getY());
+//                        invalidate();
+//                    return true;
+//                }
+//            });
+//        }
+
 
         mThickness.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
