@@ -46,6 +46,7 @@ public class ConnectionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_connection);
         ImageView iv = findViewById(R.id.imageView3);
         View root = iv.getRootView();

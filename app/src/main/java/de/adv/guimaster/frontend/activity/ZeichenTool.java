@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
+import androidx.appcompat.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
@@ -37,6 +38,9 @@ public class ZeichenTool extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.zeichentool);
+        Toolbar bar = findViewById(R.id.drawingtoolbar);
+        setSupportActionBar(bar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mThickness = (SeekBar) findViewById(R.id.thickness);
         View root = mThickness.getRootView();
         root.setBackgroundColor(ContextCompat.getColor(this,R.color.anthrazit));
@@ -89,10 +93,6 @@ public class ZeichenTool extends AppCompatActivity {
                 mDrawLayout.setPaintAlpha(mThickness.getProgress());
             }
         });
-
-
-        Bitmap bitmap =  ConvertBitmaptoPNG.getBitmap(this, R.id.imageView);
-        ConvertBitmaptoPNG.compressBitmap(bitmap,quality,outstream);
     }
 
     @Override

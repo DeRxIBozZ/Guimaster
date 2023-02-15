@@ -38,6 +38,7 @@ import java.io.OutputStream;
 
 import de.adv.guimaster.R;
 import de.adv.guimaster.api.ConvertBitmaptoPNG;
+import de.adv.guimaster.frontend.uitools.SvgView;
 
 public class FileActivity extends AppCompatActivity {
 
@@ -46,7 +47,6 @@ public class FileActivity extends AppCompatActivity {
     Button btnBack;
     Intent intent1;
     Uri bilduri;
-    Bitmap bm;
     InputStream is;
     SVG svg;
     Context c;
@@ -58,8 +58,9 @@ public class FileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_file);
-        svgView =  findViewById(R.id.svgView);
+        svgView = findViewById(R.id.svgView);
         btn = findViewById(R.id.button16);
         View root = btn.getRootView();
         btnBack = (Button) findViewById(R.id.button14);
@@ -75,9 +76,10 @@ public class FileActivity extends AppCompatActivity {
             intent1.setType("image/svg+xml");
             someActivityResultLauncher.launch(intent1);
         });
+        Context context = this;
         btnMillONPlate.setOnClickListener(v -> {
-            Bitmap bitmap = ConvertBitmaptoPNG.getBitmap(this, R.id.svgRoot);
-            ConvertBitmaptoPNG.compressBitmap(bitmap, quality, outstream);
+            Bitmap bitmap = ConvertBitmaptoPNG.createBitmapFromView(svgView,0,0);
+            ConvertBitmaptoPNG.compressBitmap(context, bitmap, quality, outstream);
         });
     }
 

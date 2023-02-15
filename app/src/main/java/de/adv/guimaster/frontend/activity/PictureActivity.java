@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -44,6 +45,7 @@ public class PictureActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_picture);
 
         iv = (ImageView) findViewById(R.id.imageView);
@@ -61,9 +63,10 @@ public class PictureActivity extends AppCompatActivity {
             intent1.setType("image/*");
             someActivityResultLauncher.launch(intent1);
         });
+        Context context = this;
         btnMillONPlate.setOnClickListener(v -> {
-            Bitmap bitmap =  ConvertBitmaptoPNG.getBitmap(this, R.id.imageView);
-            ConvertBitmaptoPNG.compressBitmap(bitmap,quality,outstream);
+            Bitmap bitmap =  ConvertBitmaptoPNG.createBitmapFromView(iv,0,0);
+            ConvertBitmaptoPNG.compressBitmap(context,bitmap,quality,outstream);
         });
     }
 

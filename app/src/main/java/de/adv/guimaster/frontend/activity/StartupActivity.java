@@ -45,6 +45,7 @@ public class StartupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         CncState.CNC_CONNECTION = (SerialPort) holder.retrieve("SerialPort");
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_startup);
         tv = findViewById(R.id.textView);
         View root = tv.getRootView();

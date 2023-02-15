@@ -36,5 +36,7 @@
     <string name="toolswitch">Tool an/aus</string>
     <string name="stepwidth">Schrittweite in mm</string>
     <string name="steptoolon">Schrittweite ist während Benutzung des Tools auf 1mm begrenzt</string>
+    <string name="clearbtn">Clear</string>
+    <string name="strokewidth">Stiftstärke</string>
 
 </resources>
