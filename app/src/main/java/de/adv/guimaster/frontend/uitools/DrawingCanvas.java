@@ -127,7 +127,15 @@ public class DrawingCanvas extends View {
                     case Rect:
                         drawPath.reset();
                         drawPath.moveTo(startX, startY);
-                        drawPath.addRect(startX, startY, touchX, touchY, Path.Direction.CW);
+                        if (startX < touchX && startY < touchY) {
+                            drawPath.addRect(startX, startY, touchX, touchY, Path.Direction.CW);
+                        } else if (startX < touchX && startY > touchY) {
+                            drawPath.addRect(startX, touchY, touchX, startY, Path.Direction.CW);
+                        } else if (startX > touchX && startY < touchY) {
+                            drawPath.addRect(touchX, startY, startX, touchY, Path.Direction.CW);
+                        } else if (startX > touchX && startY > touchY) {
+                            drawPath.addRect(touchX, touchY, startX, startY, Path.Direction.CW);
+                        }
                         break;
                     case Circle:
                         drawPath.reset();
