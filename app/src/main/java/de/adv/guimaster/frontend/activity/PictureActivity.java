@@ -20,6 +20,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.opencv.android.Utils;
+import org.opencv.core.CvType;
+import org.opencv.core.Mat;
+import org.opencv.core.Size;
+import org.opencv.imgproc.Imgproc;
 import org.w3c.dom.Text;
 
 import java.io.FileNotFoundException;
@@ -66,6 +71,22 @@ public class PictureActivity extends AppCompatActivity {
         Context context = this;
         btnMillONPlate.setOnClickListener(v -> {
             Bitmap bitmap =  ConvertBitmaptoPNG.createBitmapFromView(iv,0,0);
+            Mat src = new Mat(bitmap.getWidth(),bitmap.getHeight(), CvType.CV_8UC1);
+            Utils.bitmapToMat(bitmap,src);
+            Mat gray = new Mat(bitmap.getWidth(),bitmap.getHeight(),CvType.CV_8UC1);
+            Mat edges = new Mat(bitmap.getWidth(),bitmap.getHeight(),CvType.CV_8UC1);
+            Mat dest = new Mat(bitmap.getWidth(),bitmap.getHeight(),CvType.CV_8UC1);
+            Imgproc.cvtColor(src,gray,Imgproc.COLOR_RGBA2GRAY);
+            Imgproc.blur(gray,edges,new Size(3,3));
+            Imgproc.Canny(edges,edges,100,100*3);
+            gray.copyTo(dest,edges);
+            /*Mat gray = new Mat(bitmap.getWidth(),bitmap.getHeight(),CvType.CV_8UC1);
+            Imgproc.cvtColor(src,gray,Imgproc.COLOR_RGBA2GRAY);
+            Mat dest = new Mat(bitmap.getWidth(),bitmap.getHeight(),CvType.CV_8UC1);
+            Imgproc.Sobel(gray,dest,-1,1,1);
+            Imgproc.threshold(dest,dest,5,255,Imgproc.THRESH_BINARY);*/
+            Utils.matToBitmap(dest,bitmap);
+            iv.setImageBitmap(bitmap);
             ConvertBitmaptoPNG.compressBitmap(context,bitmap,quality,outstream);
         });
     }

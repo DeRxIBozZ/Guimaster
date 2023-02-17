@@ -20,6 +20,10 @@ import androidx.core.content.ContextCompat;
 import com.hoho.android.usbserial.driver.UsbSerialDriver;
 import com.hoho.android.usbserial.driver.UsbSerialPort;
 import com.hoho.android.usbserial.driver.UsbSerialProber;
+
+import org.opencv.android.BaseLoaderCallback;
+import org.opencv.android.OpenCVLoader;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -58,6 +62,13 @@ public class StartupActivity extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
         progressAnimation();
+        /*OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION, this, new BaseLoaderCallback(this) {
+            @Override
+            public void onManagerConnected(int status) {
+                super.onManagerConnected(status);
+            }
+        });*/
+        OpenCVLoader.initDebug();
         ca.start();
         holder.save("CustomCanvas", ca);
         try {

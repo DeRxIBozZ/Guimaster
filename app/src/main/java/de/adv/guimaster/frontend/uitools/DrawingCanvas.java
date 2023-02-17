@@ -91,7 +91,7 @@ public class DrawingCanvas extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         drawPaint.setStyle(Paint.Style.STROKE);
-        drawPaint.setColor(Color.GREEN);
+        drawPaint.setColor(Color.WHITE);
         drawPaint.setStrokeWidth(5);
         canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
         canvas.drawPath(drawPath, drawPaint);
