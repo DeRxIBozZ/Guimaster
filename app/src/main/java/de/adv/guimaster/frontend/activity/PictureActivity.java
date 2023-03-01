@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.opencv.android.Utils;
+import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Size;
@@ -30,6 +31,7 @@ import org.w3c.dom.Text;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
 import de.adv.guimaster.R;
 import de.adv.guimaster.api.ConvertBitmaptoPNG;
@@ -46,6 +48,15 @@ public class PictureActivity extends AppCompatActivity {
     InputStream is;
     int quality;
     OutputStream outstream;
+    int cannythreshold = 90;
+    int cannyratio = 1;
+    /*
+    Canny does use two thresholds (upper and lower): cannythreshold = lower, cannythreshold*cannyratio = upper
+    If a pixel gradient is higher than the upper threshold, the pixel is accepted as an edge
+    If a pixel gradient value is below the lower threshold, then it is rejected.
+    If the pixel gradient is between the two thresholds, then it will be accepted only if it is connected to a pixel that is above the upper threshold.
+    Canny recommended a upper:lower ratio between 2:1 and 3:1.
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,11 +85,12 @@ public class PictureActivity extends AppCompatActivity {
             Mat src = new Mat(bitmap.getWidth(),bitmap.getHeight(), CvType.CV_8UC1);
             Utils.bitmapToMat(bitmap,src);
             Mat gray = new Mat(bitmap.getWidth(),bitmap.getHeight(),CvType.CV_8UC1);
+            Mat temp = new Mat(bitmap.getWidth(),bitmap.getHeight(),CvType.CV_8UC1);
             Mat edges = new Mat(bitmap.getWidth(),bitmap.getHeight(),CvType.CV_8UC1);
             Mat dest = new Mat(bitmap.getWidth(),bitmap.getHeight(),CvType.CV_8UC1);
             Imgproc.cvtColor(src,gray,Imgproc.COLOR_RGBA2GRAY);
             Imgproc.blur(gray,edges,new Size(3,3));
-            Imgproc.Canny(edges,edges,100,100*3);
+            Imgproc.Canny(edges,edges,cannythreshold,cannythreshold*cannyratio);
             gray.copyTo(dest,edges);
             /*Mat gray = new Mat(bitmap.getWidth(),bitmap.getHeight(),CvType.CV_8UC1);
             Imgproc.cvtColor(src,gray,Imgproc.COLOR_RGBA2GRAY);
