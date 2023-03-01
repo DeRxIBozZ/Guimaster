@@ -18,7 +18,6 @@ import java.io.OutputStream;
 
 import de.adv.guimaster.R;
 import de.adv.guimaster.frontend.logic.DataHolder;
-import de.adv.guimaster.frontend.logic.DrawingView;
 import de.adv.guimaster.frontend.uitools.DrawingCanvas;
 import de.adv.guimaster.frontend.uitools.Forms;
 
@@ -45,16 +44,16 @@ public class ZeichenTool extends AppCompatActivity {
         mDrawLayout = (DrawingCanvas) findViewById(R.id.viewDraw);
         erase = (Button) findViewById(R.id.erase);
         findViewById(R.id.draw).setOnClickListener(v -> {
-            mDrawLayout.setForms(Forms.FreeForm);
+            mDrawLayout.setForms(Forms.FREE_FORM);
         });
         findViewById(R.id.buttonRec).setOnClickListener(v -> {
-            mDrawLayout.setForms(Forms.Rect);
+            mDrawLayout.setForms(Forms.RECT);
         });
         findViewById(R.id.buttonLine).setOnClickListener(v -> {
-            mDrawLayout.setForms(Forms.Line);
+            mDrawLayout.setForms(Forms.LINE);
         });
         findViewById(R.id.buttonCircle).setOnClickListener(v -> {
-            mDrawLayout.setForms(Forms.Circle);
+            mDrawLayout.setForms(Forms.CIRCLE);
         });
 
         mDrawLayout.setVisibility(View.VISIBLE);

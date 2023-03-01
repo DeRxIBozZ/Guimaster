@@ -47,13 +47,13 @@ public class DrawingView extends View {
         paint.setColor(Color.GREEN);
         paint.setStrokeWidth(5);
         switch (this.forms) {
-            case Line:
+            case LINE:
                 canvas.drawLine(x,y,endX,endY, paint);
                 break;
-            case Rect:
+            case RECT:
                 canvas.drawRect(x,y,endX,endY,paint);
                 break;
-            case Circle:
+            case CIRCLE:
                 canvas.drawCircle(x, y, calcRadius(x,y,endX,endY), paint);
                 break;
         }

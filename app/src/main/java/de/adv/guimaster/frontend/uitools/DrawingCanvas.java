@@ -13,8 +13,6 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import androidx.annotation.Nullable;
-
 public class DrawingCanvas extends View {
 
     static Path drawPath;
@@ -30,7 +28,7 @@ public class DrawingCanvas extends View {
     private Bitmap canvasBitmap;
     //eraser mode
     private boolean erase=false;
-    private Forms forms = Forms.FreeForm;
+    private Forms forms = Forms.FREE_FORM;
     float startX;
     float startY;
 
@@ -115,16 +113,16 @@ public class DrawingCanvas extends View {
                 break;
             case MotionEvent.ACTION_MOVE:
                 switch (forms) {
-                    case FreeForm:
+                    case FREE_FORM:
                         drawCanvas.drawPath(drawPath, drawPaint);
                         drawPath.lineTo(touchX, touchY);
                         break;
-                    case Line:
+                    case LINE:
                         drawPath.reset();
                         drawPath.moveTo(startX, startY);
                         drawPath.lineTo(touchX, touchY);
                         break;
-                    case Rect:
+                    case RECT:
                         drawPath.reset();
                         drawPath.moveTo(startX, startY);
                         if (startX < touchX && startY < touchY) {
@@ -137,16 +135,18 @@ public class DrawingCanvas extends View {
                             drawPath.addRect(touchX, touchY, startX, startY, Path.Direction.CW);
                         }
                         break;
-                    case Circle:
+                    case CIRCLE:
                         drawPath.reset();
                         drawPath.moveTo(startX, startY);
                         drawPath.addCircle(startX, startY, calcRadius(startX, startY, touchX,touchY), Path.Direction.CW);
                         break;
+                    default:
+                        return false;
                 }
 
                 break;
             case MotionEvent.ACTION_UP:
-                if(forms == Forms.FreeForm) {
+                if(forms.equals(Forms.FREE_FORM)) {
                     drawPath.lineTo(touchX, touchY);
                 }
                 drawCanvas.drawPath(drawPath, drawPaint);
