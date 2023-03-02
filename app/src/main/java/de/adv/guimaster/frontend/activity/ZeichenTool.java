@@ -38,11 +38,11 @@ public class ZeichenTool extends AppCompatActivity {
         Toolbar bar = findViewById(R.id.drawingtoolbar);
         setSupportActionBar(bar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mThickness = (SeekBar) findViewById(R.id.thickness);
+        mThickness = findViewById(R.id.thickness);
         View root = mThickness.getRootView();
         root.setBackgroundColor(ContextCompat.getColor(this,R.color.anthrazit));
-        mDrawLayout = (DrawingCanvas) findViewById(R.id.viewDraw);
-        erase = (Button) findViewById(R.id.erase);
+        mDrawLayout = findViewById(R.id.viewDraw);
+        erase = findViewById(R.id.erase);
         findViewById(R.id.draw).setOnClickListener(v -> {
             mDrawLayout.setForms(Forms.FREE_FORM);
         });
@@ -57,7 +57,6 @@ public class ZeichenTool extends AppCompatActivity {
         });
 
         mDrawLayout.setVisibility(View.VISIBLE);
-        //mDrawLayout.setDrawingCacheEnabled(true);
         mDrawLayout.setEnabled(true);
         mThickness.setMax(50);
         mThickness.setProgress(10);

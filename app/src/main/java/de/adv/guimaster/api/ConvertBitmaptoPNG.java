@@ -67,9 +67,14 @@ public class ConvertBitmaptoPNG {
         try {
             File file = new File(context.getExternalCacheDir(),"tmp.png");
             FileOutputStream fileOutputStream = new FileOutputStream(file);
-            bitmap.compress(Bitmap.CompressFormat.PNG, quality, fileOutputStream);
-            fileOutputStream.close();
-            SerialPort.file = file;
+            if(outstream == null) {
+                bitmap.compress(Bitmap.CompressFormat.PNG, quality, fileOutputStream);
+                fileOutputStream.close();
+                SerialPort.file = file;
+            } else {
+                bitmap.compress(Bitmap.CompressFormat.PNG, quality, outstream);
+                outstream.close();
+            }
         } catch (Exception e) {}
     }
 

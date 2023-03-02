@@ -38,5 +38,11 @@
     <string name="steptoolon">Schrittweite ist während Benutzung des Tools auf 1mm begrenzt</string>
     <string name="clearbtn">Clear</string>
     <string name="strokewidth">Stiftstärke</string>
+    <string name="addsvg">Svg hinzufügen</string>
+    <string name="preview">Vorschau anzeigen</string>
+    <string name="mill">Fräßvorgang starten</string>
+    <string name="takepic">Bild aufnehmen</string>
+    <string name="accuracy">Genauigkeit anpassen</string>
+    <string name="yourpic">Ausgewähltes Bild</string>
 
 </resources>
