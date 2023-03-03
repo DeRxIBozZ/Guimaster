@@ -1,5 +1,6 @@
 package de.adv.guimaster.frontend.activity;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -30,6 +31,7 @@ public class ZeichenTool extends AppCompatActivity {
     private Paint drawPaint = new Paint();
     int quality;
     OutputStream outstream;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
