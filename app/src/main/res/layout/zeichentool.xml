@@ -52,14 +52,14 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="4dp"
-                android:layout_marginEnd="176dp"
+                android:layout_marginEnd="100dp"
                 android:layout_marginBottom="4dp"
                 android:backgroundTint="#FFFFFF"
                 android:text="@string/clearbtn"
                 android:textAlignment="center"
                 android:textColor="#000000"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/millOnplate"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
@@ -140,16 +140,17 @@
                 app:layout_constraintEnd_toStartOf="@+id/ClearAll"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Spinner
-                android:id="@+id/dropdown"
-                android:layout_width="0dp"
+            <Button
+                android:id="@+id/millOnplate"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:background="@android:drawable/btn_dropdown"
+                android:backgroundTint="#FFFFFF"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="4dp"
+                android:text="Mill On Plate"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/ClearAll"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
