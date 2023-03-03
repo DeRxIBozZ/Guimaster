@@ -1,12 +1,11 @@
 package de.adv.guimaster.frontend.activity;
 
-import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
@@ -29,8 +28,6 @@ public class ZeichenTool extends AppCompatActivity {
     private DrawingCanvas mDrawLayout;
     Button erase;
     private Paint drawPaint = new Paint();
-    int quality;
-    OutputStream outstream;
 
 
     @Override
@@ -46,16 +43,21 @@ public class ZeichenTool extends AppCompatActivity {
         mDrawLayout = findViewById(R.id.viewDraw);
         erase = findViewById(R.id.erase);
         findViewById(R.id.draw).setOnClickListener(v -> {
+            mDrawLayout.setErase(false);
             mDrawLayout.setForms(Forms.FREE_FORM);
         });
         findViewById(R.id.buttonRec).setOnClickListener(v -> {
             mDrawLayout.setForms(Forms.RECT);
         });
         findViewById(R.id.buttonLine).setOnClickListener(v -> {
+            mDrawLayout.setErase(false);
             mDrawLayout.setForms(Forms.LINE);
         });
         findViewById(R.id.buttonCircle).setOnClickListener(v -> {
             mDrawLayout.setForms(Forms.CIRCLE);
+        });
+        findViewById(R.id.ClearAll).setOnClickListener(v -> {
+            mDrawLayout.eraseAll();
         });
 
         mDrawLayout.setVisibility(View.VISIBLE);
@@ -68,12 +70,11 @@ public class ZeichenTool extends AppCompatActivity {
         mDrawLayout.invalidate();
 
         erase.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
+                mDrawLayout.setForms(Forms.FREE_FORM);
                 drawPaint.setColor(Color.TRANSPARENT);
                 mDrawLayout.setErase(true);
-
             }
         });
 
@@ -106,11 +107,23 @@ public class ZeichenTool extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // API 5+ solution
+                onBackPressed();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+//    public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         //getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+//        return true;
+//    }
 
 
     public void afterDialogClose(){

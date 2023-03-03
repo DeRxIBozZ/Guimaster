@@ -90,12 +90,16 @@ public class DrawingCanvas extends View {
     protected void onDraw(Canvas canvas) {
         drawPaint.setStyle(Paint.Style.STROKE);
         drawPaint.setColor(Color.WHITE);
-        drawPaint.setStrokeWidth(5);
+        drawPaint.setStrokeWidth(STROKE_WIDTH);
         canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
         canvas.drawPath(drawPath, drawPaint);
     }
 
     //***************************   respond to touch interaction   **************************************************
+
+    public void eraseAll() {
+        canvasBitmap.eraseColor(Color.TRANSPARENT);
+    }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
