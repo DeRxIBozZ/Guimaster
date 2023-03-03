@@ -104,6 +104,17 @@ public class PictureActivity extends AppCompatActivity {
         takePicBtn.setOnClickListener(v -> {
                     takePicActivityResultLauncher.launch(picUri);
         });
+        btnMillONPlate.setOnClickListener(v -> {
+            Bitmap bitmap = ConvertBitmaptoPNG.createBitmapFromView(iv,0,0);
+            Mat src = new Mat(bitmap.getWidth(),bitmap.getHeight(),CvType.CV_8UC1);
+            Utils.bitmapToMat(bitmap,src);
+            Mat gray = new Mat(bitmap.getWidth(),bitmap.getHeight(),CvType.CV_8UC1);
+            Imgproc.cvtColor(src,gray,Imgproc.COLOR_RGBA2GRAY);
+            Imgproc.threshold(gray,src,127,255,Imgproc.THRESH_BINARY);
+            Utils.matToBitmap(src,bitmap);
+            iv.setImageBitmap(bitmap);
+            ConvertBitmaptoPNG.compressBitmap(context, bitmap, quality, outstream);
+        });
         root.setBackgroundColor(ContextCompat.getColor(this,R.color.anthrazit));
         btn.setOnClickListener(v -> {
             intent1 = new Intent(Intent.ACTION_GET_CONTENT);
@@ -114,7 +125,6 @@ public class PictureActivity extends AppCompatActivity {
             processImage();
             textView.setVisibility(View.VISIBLE);
             thresholdseek.setVisibility(View.VISIBLE);
-
         });
         setSeekBarListener();
     }
