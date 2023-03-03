@@ -28,8 +28,6 @@ public class ZeichenTool extends AppCompatActivity {
     private DrawingCanvas mDrawLayout;
     Button erase;
     private Paint drawPaint = new Paint();
-    int quality;
-    OutputStream outstream;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +40,14 @@ public class ZeichenTool extends AppCompatActivity {
         View root = mThickness.getRootView();
         root.setBackgroundColor(ContextCompat.getColor(this,R.color.anthrazit));
         mDrawLayout = findViewById(R.id.viewDraw);
+        mDrawLayout.setVisibility(View.VISIBLE);
+        mDrawLayout.setEnabled(true);
+        mThickness.setMax(50);
+        mThickness.setProgress(10);
+        mDrawLayout.setPaintAlpha(mThickness.getProgress());
+        int currLevel = mDrawLayout.getPaintAlpha();
+        mThickness.setProgress(currLevel);
+        mDrawLayout.invalidate();
         erase = findViewById(R.id.erase);
         findViewById(R.id.draw).setOnClickListener(v -> {
             mDrawLayout.setForms(Forms.FREE_FORM);
@@ -56,14 +62,7 @@ public class ZeichenTool extends AppCompatActivity {
             mDrawLayout.setForms(Forms.CIRCLE);
         });
 
-        mDrawLayout.setVisibility(View.VISIBLE);
-        mDrawLayout.setEnabled(true);
-        mThickness.setMax(50);
-        mThickness.setProgress(10);
-        mDrawLayout.setPaintAlpha(mThickness.getProgress());
-        int currLevel = mDrawLayout.getPaintAlpha();
-        mThickness.setProgress(currLevel);
-        mDrawLayout.invalidate();
+
 
         erase.setOnClickListener(new View.OnClickListener() {
 
@@ -74,15 +73,6 @@ public class ZeichenTool extends AppCompatActivity {
 
             }
         });
-
-//        draw.setOnClickListener(new View.OnClickListener() {
-
-//            @Override
-//            public void onClick(View v) {
-//                mDrawLayout.setErase(false);
-
-//            }
-//        });
 
 
         mThickness.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {

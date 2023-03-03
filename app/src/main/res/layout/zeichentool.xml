@@ -13,7 +13,6 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/erase"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,66 +26,41 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/erase"
-        app:layout_constraintStart_toEndOf="@+id/draw" />
-
-    <Button
-        android:id="@+id/erase"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/thickness"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="#FFFFFF"
-        android:text="@string/erase"
-        android:textColor="#000000"
-        app:icon="@drawable/eraser_svgrepo_com"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/draw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/erase"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="#FFFFFF"
-        android:text="@string/draw"
-        android:textColor="#000000"
-        app:icon="@drawable/pencil_svgrepo_com"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/drawingtoolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/drawingtoolbar">
+        tools:layout_editor_absoluteX="16dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="16dp">
 
             <Button
-                android:id="@+id/button20"
+                android:id="@+id/clearall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="4dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="4dp"
                 android:backgroundTint="#FFFFFF"
-                android:text="@string/clearbtn"
                 android:textAlignment="center"
+                android:text="@string/clearbtn"
                 android:textColor="#000000"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/button21"
+                android:id="@+id/erase"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="false"
@@ -98,12 +72,12 @@
                 android:textColor="#000000"
                 app:icon="@drawable/eraser_svgrepo_com"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/button20"
+                app:layout_constraintEnd_toStartOf="@id/clearall"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <Button
-                android:id="@+id/button22"
+                android:id="@+id/draw"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="false"
@@ -113,9 +87,9 @@
                 android:backgroundTint="#FFFFFF"
                 android:textAlignment="center"
                 android:textColor="#000000"
-                app:icon="@drawable/eraser_svgrepo_com"
+                app:icon="@drawable/pencil_svgrepo_com"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/button21"
+                app:layout_constraintEnd_toStartOf="@id/erase"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="SpeakableTextPresentCheck" />
 
@@ -125,14 +99,14 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="false"
                 android:layout_marginTop="4dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="1170dp"
                 android:layout_marginBottom="4dp"
                 android:backgroundTint="#FFFFFF"
                 android:textAlignment="center"
                 android:textColor="#000000"
                 app:icon="@drawable/circle_empty_geometry_container_round_svgrepo_com"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/button22"
+                app:layout_constraintEnd_toStartOf="@+id/draw"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="SpeakableTextPresentCheck" />
 
@@ -142,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="false"
                 android:layout_marginTop="4dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="4dp"
                 android:backgroundTint="#FFFFFF"
                 android:textAlignment="center"
@@ -158,15 +132,17 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="false"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="4dp"
                 android:backgroundTint="#FFFFFF"
                 android:textAlignment="center"
                 android:textColor="#000000"
                 app:icon="@drawable/line_svgrepo_com"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/buttonRec"
+                app:layout_constraintEnd_toStartOf="@+id/buttonRec"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="SpeakableTextPresentCheck" />
 
