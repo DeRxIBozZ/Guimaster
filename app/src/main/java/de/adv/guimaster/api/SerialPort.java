@@ -28,6 +28,8 @@ public class SerialPort {
     UsbManager manager;
     UsbDevice device = null;
     static File file;
+    public static int width; // in mm
+    public static int height; // in mm
     Instructions instructions = new Instructions();
 
     public SerialPort(UsbManager manager){

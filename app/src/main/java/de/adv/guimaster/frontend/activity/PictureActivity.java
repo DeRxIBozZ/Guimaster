@@ -16,6 +16,8 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.renderscript.ScriptGroup;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -32,6 +34,7 @@ import org.opencv.imgproc.Imgproc;
 import org.w3c.dom.Text;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -156,7 +159,7 @@ public class PictureActivity extends AppCompatActivity {
                         try {
                             is = getContentResolver().openInputStream(bilduri);
                             bm = BitmapFactory.decodeStream(is);
-                            ConvertBitmaptoPNG.compressBitmap(context,bm,90,new FileOutputStream(takenPicture));
+                            //copy(is,takenPicture);
                             iv.setImageBitmap(bm);
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -187,21 +190,39 @@ public class PictureActivity extends AppCompatActivity {
     }
 
     private void processImage(){
-        Bitmap bitmap = bm;
-        Mat src = new Mat(bitmap.getWidth(),bitmap.getHeight(), CvType.CV_8UC1);
-        Utils.bitmapToMat(bitmap,src);
-        Mat gray = new Mat(bitmap.getWidth(),bitmap.getHeight(),CvType.CV_8UC1);
-        Mat edges = new Mat(bitmap.getWidth(),bitmap.getHeight(),CvType.CV_8UC1);
-        Mat dest = new Mat(bitmap.getWidth(),bitmap.getHeight(),CvType.CV_8UC1);
-        Imgproc.cvtColor(src,gray,Imgproc.COLOR_RGBA2GRAY);
-        Imgproc.blur(gray,edges,new Size(3,3));
-        Imgproc.Canny(edges,edges,cannythreshold,cannythreshold*cannyratio);
-        gray.copyTo(dest,edges);
-        Bitmap viewBitmap = bitmap.copy(Bitmap.Config.ARGB_8888,true);
-        Utils.matToBitmap(dest,viewBitmap);
-        iv.setImageBitmap(viewBitmap);
-        iv.invalidate();
-        ConvertBitmaptoPNG.compressBitmap(this,bitmap,quality,outstream);
+            Bitmap bitmap = bm.copy(Bitmap.Config.ARGB_8888,true);
+            Mat src = new Mat(bitmap.getWidth(),bitmap.getHeight(), CvType.CV_8UC1);
+            Utils.bitmapToMat(bitmap,src);
+            Mat gray = new Mat(bitmap.getWidth(),bitmap.getHeight(),CvType.CV_8UC1);
+            Mat edges = new Mat(bitmap.getWidth(),bitmap.getHeight(),CvType.CV_8UC1);
+            Mat dest = new Mat(bitmap.getWidth(),bitmap.getHeight(),CvType.CV_8UC1);
+            Imgproc.cvtColor(src,gray,Imgproc.COLOR_RGBA2GRAY);
+            Imgproc.blur(gray,edges,new Size(3,3));
+            Imgproc.Canny(edges,edges,cannythreshold,cannythreshold*cannyratio);
+            gray.copyTo(dest,edges);
+            Utils.matToBitmap(dest,bitmap);
+            iv.setImageBitmap(bitmap);
+            iv.invalidate();
+            ConvertBitmaptoPNG.compressBitmap(this,bitmap,quality,outstream);
     }
 
+    private void copy(InputStream in, File dest){
+        try{
+            OutputStream out = new FileOutputStream(dest);
+            byte[] buffer = new byte[1024];
+            int len;
+            while((len = in.read(buffer)) > 0){
+                out.write(buffer,0,len);
+            }
+        } catch (Exception e){}
+    }
+
+    public Bitmap decodeFile(File file){
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 2;
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeFile(file.getAbsolutePath(), options);
+
+
+    }
 }
