@@ -12,6 +12,7 @@ public class Constants {
     public static final int DEPTHWIDTH = 300;
     public static final int DEPTHHEIGHT = 1300;
     public static final int WRITE_WAIT_MILLIS = 100;
+    public static final int BLOCKSIZE = 1000;
     public static final String USB_PERMISSION = "de.adv.guimaster.USB_PERMISSION";
     public static void saveLogcatToFile(Context context) {
         String fileName = "logcat_"+System.currentTimeMillis()+".txt";

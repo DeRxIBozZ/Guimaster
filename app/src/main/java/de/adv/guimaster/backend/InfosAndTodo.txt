@@ -1,0 +1,30 @@
+Hey Jungs hier würde ich Links, Infos und Todos zu unserem Projekt zwischenspeichern. Das macht am Ende die Dokumentation und Ressourcensuche deutlich leichter :)
+
+TODOs:
+- JAR der Frontend Gruppe bereitstellen um sich mit der CNC verbinden zu können und in Achsenrichtung zu fahren
+- Wie simulieren wir den generierten G-Code um zu erkennen was wir eigentlich fräsen?
+- Allgemeiner G-Code in den spezifischen CNC 580 / CNC 980 vhf parsen
+- Tests für die einzelnen Methoden / Abläufe / Verbindungsaufbau etc. schreiben
+
+Infos:
+1) JARs zum Installieren
+1.1 jSerialComm     https://fazecast.github.io/jSerialComm/
+1.2 commons-lang    https://commons.apache.org/proper/commons-lang/download_lang.cgi
+
+2) Seriellen Port emulieren
+2.1 https://www.eltima.com/vspd-post-download.html herunterladen + installieren
+2.2 Loopback Port erstellen und für Tests 'COM1' benennen
+2.3 TODO: Noch eine Klasse schreiben die auf die Antwort des Portes wie die CNC Maschine reagiert
+    TODO: Wie wird bei mehreren Ports der richtige ausgewählt?
+
+2) Bei einer seriellen Datenübertragung wird die serielle Schnittstelle der Steuerung durch folgende Parameter definiert
+(parameterisieren durch übetragen der Initialisierungsdatei)
+* Baudrate: 38400
+* Data Bits: 8
+* Stop Bits: 1
+* Parity: keine
+* Flow Control: Xon/Xoff
+
+TO-DO's GUI :
+Manuelle Ansteuerung der Maschine ermöglichen -> xyz Buttons mit Schrittweite Slider, Werkzeug an/aus mit RPM Slider -> JSlider
+Import von Bildern ermöglichen -> jedes Format möglich, auf gewisse Größe beschränken -> per JFileChooser

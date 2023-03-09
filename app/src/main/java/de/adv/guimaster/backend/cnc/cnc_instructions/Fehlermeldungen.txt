@@ -1,0 +1,55 @@
+E1=unsupported command;
+E2=invalid command;
+E3=command not allowed in this state;
+E4=syntax error;
+E5=invalid feature;
+E6=stopped by user;
+
+E10=invalid parameter;
+E11=unknown error;
+E12=missing parameter;
+E13=parameter is out of range;
+E14=no customer profile;
+
+E20=axis not defined;
+E21=axis not combinable;
+E22=axis not referenced;
+E23=no referenzpoint found;
+E24=no measurepoint found;
+E25=axis range ended;
+E26=tool too long;
+E27=tool too short;
+
+E30=no spindle defined;
+E31=no spindle response;
+E32=spindle input active;
+
+E40=can not record macro;
+E41=macro too long;
+E42=error in last macro;
+E43=macro not found;
+
+E50=initial stop;
+E51=external stop;
+E52=power driver stop;
+E53=external spindle stop;
+E54=internal spindle stop;
+E55=hbox stop;
+E56=powerfail stop;
+E57=fpga confdone stop;
+E58=refswitch stop;
+E59=fpga error stop;
+
+E60=overcurrent spindle stop;
+E61=overload spindle stop;
+E62=wait for input stop;
+E63=unexpected input stop;
+
+E70=leveloffset too high;
+E71=internal error;
+E72=error opening/reading file;
+E73=no answer from device;
+E74=error while loading fpga;
+E75=update not feasible;
+E76=update failed;
+E77=wait for input failed;

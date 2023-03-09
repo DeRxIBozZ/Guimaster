@@ -1,14 +1,11 @@
 package de.adv.guimaster.frontend.uitools;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -18,10 +15,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
+import com.hoho.android.usbserial.driver.UsbSerialPort;
+import com.hoho.android.usbserial.util.SerialInputOutputManager;
+
 import de.adv.guimaster.R;
 import de.adv.guimaster.api.SerialPort;
-import de.adv.guimaster.frontend.activity.MainActivity;
-import de.adv.guimaster.frontend.activity.ZeichenTool;
+import de.adv.guimaster.backend.BackendRunnable;
 import de.adv.guimaster.frontend.logic.DataHolder;
 
 public class DimensionDialog extends DialogFragment {
@@ -66,6 +65,7 @@ public class DimensionDialog extends DialogFragment {
     public void onCancel(){
         this.dismiss();
     }
+
     public void onSubmit() {
         swidth = widthEditText.getText().toString();
         sheight = heightEditText.getText().toString();
@@ -78,8 +78,11 @@ public class DimensionDialog extends DialogFragment {
                     .setCancelable(false)
                     .setPositiveButton(R.string.ok, (dialogInterface, i) -> {
                         //openStandbyDialog();
+                        BackendRunnable cncStarter = new BackendRunnable();
+                        SerialPort.usbIOmanager = new SerialInputOutputManager(((SerialPort) DataHolder.getInstance().retrieve("Serialport")).usbSerialPort,cncStarter);
+                        Thread backend = new Thread(cncStarter);
+                        backend.start();
                         dialogInterface.dismiss();
-
                     })
                     .setNegativeButton(R.string.back, (dialogInterface, i) -> {
                         dialogInterface.dismiss();

@@ -2,38 +2,21 @@ package de.adv.guimaster.frontend.activity;
 
 import static de.adv.guimaster.frontend.logic.Constants.saveLogcatToFile;
 
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.hardware.usb.UsbDevice;
-import android.hardware.usb.UsbDeviceConnection;
-import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import com.hoho.android.usbserial.driver.UsbSerialDriver;
-import com.hoho.android.usbserial.driver.UsbSerialPort;
-import com.hoho.android.usbserial.driver.UsbSerialProber;
-
-import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.OpenCVLoader;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
 import de.adv.guimaster.R;
 import de.adv.guimaster.api.SerialPort;
-import de.adv.guimaster.backend.CncState;
+import de.adv.guimaster.backend.cnc.CncState;
 import de.adv.guimaster.frontend.uitools.ProgressBarAnimation;
-import de.adv.guimaster.frontend.logic.Constants;
 import de.adv.guimaster.frontend.logic.CustomCanvas;
 import de.adv.guimaster.frontend.logic.DataHolder;
 
@@ -47,7 +30,6 @@ public class StartupActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        CncState.CNC_CONNECTION = (SerialPort) holder.retrieve("SerialPort");
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_startup);

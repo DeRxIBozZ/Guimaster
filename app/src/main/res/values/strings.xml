@@ -45,5 +45,6 @@
     <string name="accuracy">Genauigkeit anpassen</string>
     <string name="yourpic">Ausgewähltes Bild</string>
     <string name="milldescription">Fräsvorgang mit gegebenen Parametern starten?</string>
+    <string name="backenderror">Fehler im Backend</string>
 
 </resources>

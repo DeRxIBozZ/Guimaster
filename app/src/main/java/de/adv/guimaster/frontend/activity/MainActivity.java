@@ -9,11 +9,16 @@ import android.view.View;
 import android.widget.Button;
 
 import de.adv.guimaster.R;
+import de.adv.guimaster.api.SerialPort;
+import de.adv.guimaster.backend.cnc.CncState;
+import de.adv.guimaster.frontend.logic.DataHolder;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        DataHolder holder = DataHolder.getInstance();
+        CncState.CNC_CONNECTION = (SerialPort) holder.retrieve("SerialPort");
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
