@@ -13,9 +13,12 @@ import androidx.core.content.ContextCompat;
 
 import org.opencv.android.OpenCVLoader;
 
+import java.lang.invoke.ConstantCallSite;
+
 import de.adv.guimaster.R;
 import de.adv.guimaster.api.SerialPort;
 import de.adv.guimaster.backend.cnc.CncState;
+import de.adv.guimaster.frontend.logic.Constants;
 import de.adv.guimaster.frontend.uitools.ProgressBarAnimation;
 import de.adv.guimaster.frontend.logic.CustomCanvas;
 import de.adv.guimaster.frontend.logic.DataHolder;
@@ -31,6 +34,7 @@ public class StartupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Constants.clearLog();
         getSupportActionBar().hide();
         setContentView(R.layout.activity_startup);
         tv = findViewById(R.id.textView);

@@ -1,6 +1,8 @@
 package de.adv.guimaster.backend;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.hoho.android.usbserial.util.SerialInputOutputManager;
 
@@ -8,15 +10,23 @@ import de.adv.guimaster.api.SerialPort;
 import de.adv.guimaster.backend.cnc.CncState;
 import de.adv.guimaster.backend.cnc.cnc_instructions.Instructions;
 import de.adv.guimaster.backend.cnc.cnc_instructions.Parser;
+import de.adv.guimaster.frontend.activity.FileActivity;
 import de.adv.guimaster.frontend.logic.Constants;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class BackendRunnable implements Runnable, SerialInputOutputManager.Listener {
 
     private int count = 0;
     private ArrayList<int[]> gcode;
     private Instructions i;
+    Context c;
+
+    public void setContext(Context context){
+        c = context;
+    }
 
     @Override
     public void run() {
@@ -38,7 +48,7 @@ public class BackendRunnable implements Runnable, SerialInputOutputManager.Liste
 
             i.goCoordinate(40000, 20000, 130000);
             i.goCoordinate(40000, 20000, 142300);
-            sendSomeGCode();
+            sendGCode();
 
         }catch (Exception e){
             Log.v("Backend-Exception", e.getMessage());
@@ -47,16 +57,21 @@ public class BackendRunnable implements Runnable, SerialInputOutputManager.Liste
 
     @Override
     public void onNewData(byte[] data) {
+       /* CharSequence txt = Arrays.toString(data);
+        Toast t1 = Toast.makeText(c,txt,Toast.LENGTH_LONG);
         for (byte b:
              data) {
             if(b == ';'){
                 count += 1;
+                CharSequence txt = b + "" + count;
+                Toast t1 = Toast.makeText(c,txt,Toast.LENGTH_SHORT);
+                t1.show();
             }
         }
-        if (count >= 1000){
+        if (count >= Constants.BLOCKSIZE){
             count = 0;
-            sendSomeGCode();
-        }
+            sendGCode();
+        }*/
     }
 
     @Override
@@ -64,17 +79,21 @@ public class BackendRunnable implements Runnable, SerialInputOutputManager.Liste
         Log.v("Data Transfer error", e.getMessage());
     }
 
-    private void sendSomeGCode(){
-        for (int i = 0; i < Constants.BLOCKSIZE; i++){
-            if(gcode.isEmpty()){
-                finish();
-                break;
-            } else {
-                int[] tmp = gcode.get(0);
-                gcode.remove(0);
-                gCodeToAxisMov(tmp);
+    private void sendGCode(){
+        System.out.println("KOORDINATENARRAYGROESSE: " + gcode.size());
+        for (int[] coordinate:gcode) {
+            gCodeToAxisMov(coordinate);
+            count += 1;
+            if(count == 10){
+                count = 0;
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e){
+                    Log.v("Sleep interrupt",e.getMessage());
+                }
             }
         }
+        finish();
     }
 
     private void gCodeToAxisMov(int[] koordinate) {

@@ -78,9 +78,8 @@ public class DimensionDialog extends DialogFragment {
                     .setCancelable(false)
                     .setPositiveButton(R.string.ok, (dialogInterface, i) -> {
                         //openStandbyDialog();
-                        BackendRunnable cncStarter = new BackendRunnable();
-                        SerialPort.usbIOmanager = new SerialInputOutputManager(((SerialPort) DataHolder.getInstance().retrieve("Serialport")).usbSerialPort,cncStarter);
-                        Thread backend = new Thread(cncStarter);
+                        SerialPort.runnable.setContext(context);
+                        Thread backend = new Thread(SerialPort.runnable);
                         backend.start();
                         dialogInterface.dismiss();
                     })

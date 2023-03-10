@@ -16,21 +16,26 @@ import com.hoho.android.usbserial.util.SerialInputOutputManager;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
+import de.adv.guimaster.backend.BackendRunnable;
 import de.adv.guimaster.backend.cnc.cnc_instructions.Instructions;
 import de.adv.guimaster.frontend.logic.Constants;
+import de.adv.guimaster.frontend.logic.DataHolder;
 
 public class SerialPort {
 
     public UsbSerialPort usbSerialPort;
+    private int count = 0;
     UsbManager manager;
     UsbDevice device = null;
     public static File file;
     public static int width; // in mm
     public static int height; // in mm
+    public static BackendRunnable runnable;
     public static Instructions instructions = new Instructions();
     public static SerialInputOutputManager usbIOmanager;
 
@@ -91,6 +96,8 @@ public class SerialPort {
 
     public void sendStringToComm(String command){
         byte[] buffer = command.getBytes();
+        count++;
+        System.out.println("Command : " + Arrays.toString(buffer) + "\nCount: " + count);
         try {
             usbSerialPort.write(buffer, Constants.WRITE_WAIT_MILLIS);
         } catch (IOException ioException){
@@ -211,5 +218,7 @@ public class SerialPort {
         sendStringToComm("P9204=10700;");
         sendStringToComm("P9205=2200;");
         sendStringToComm("!N;RF;");
+        SerialPort.runnable = new BackendRunnable();
+        SerialPort.usbIOmanager = new SerialInputOutputManager(usbSerialPort,SerialPort.runnable);
     }
 }
