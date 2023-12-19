@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import com.hoho.android.usbserial.util.SerialInputOutputManager;
 
+import de.adv.guimaster.R;
 import de.adv.guimaster.api.SerialPort;
 import de.adv.guimaster.backend.cnc.CncState;
 import de.adv.guimaster.backend.cnc.cnc_instructions.Instructions;
@@ -16,17 +17,14 @@ import de.adv.guimaster.frontend.logic.Constants;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Vector;
 
-public class BackendRunnable implements Runnable, SerialInputOutputManager.Listener {
+public class BackendRunnable implements Runnable {
 
     private int count = 0;
     private ArrayList<int[]> gcode;
     private Instructions i;
-    Context c;
-
-    public void setContext(Context context){
-        c = context;
-    }
 
     @Override
     public void run() {
@@ -42,60 +40,56 @@ public class BackendRunnable implements Runnable, SerialInputOutputManager.Liste
             gcode = p.getgCode();
             // verbinde dich mit COMPort
 
-            i.setzeVorschub(38 * 1000);
+            i.setzeVorschub(25 * 1000);
 
             i.startTool(20000);
 
-            i.goCoordinate(40000, 20000, 130000);
-            i.goCoordinate(40000, 20000, 142300);
-            sendGCode();
-
+            i.goCoordinate(37000, 17000, 142000);
+            i.goCoordinate(37000, 17000, 142800);
+            Vector<List<int[]>> gCodeBlocks = splitGCode(gcode);
         }catch (Exception e){
             Log.v("Backend-Exception", e.getMessage());
         }
+        sendGCode(gcode);
+
     }
 
-    @Override
-    public void onNewData(byte[] data) {
-       /* CharSequence txt = Arrays.toString(data);
-        Toast t1 = Toast.makeText(c,txt,Toast.LENGTH_LONG);
-        for (byte b:
-             data) {
-            if(b == ';'){
-                count += 1;
-                CharSequence txt = b + "" + count;
-                Toast t1 = Toast.makeText(c,txt,Toast.LENGTH_SHORT);
-                t1.show();
+
+
+    /*private void sendGCode(Vector<List<int[]>> gCode){
+        for (List<int[]> block: gCode) {
+            for (int[] command:block) {
+                gCodeToAxisMov(command);
+            }
+            try {
+                Thread.sleep((long) block.size() * Constants.APPROX_TIME);
+            } catch (InterruptedException ie){
+                System.out.println(ie.getMessage());
             }
         }
-        if (count >= Constants.BLOCKSIZE){
-            count = 0;
-            sendGCode();
-        }*/
-    }
+        finish();
+    }*/
 
-    @Override
-    public void onRunError(Exception e) {
-        Log.v("Data Transfer error", e.getMessage());
-    }
-
-    private void sendGCode(){
-        System.out.println("KOORDINATENARRAYGROESSE: " + gcode.size());
-        for (int[] coordinate:gcode) {
-            gCodeToAxisMov(coordinate);
-            count += 1;
-            if(count == 10){
-                count = 0;
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e){
-                    Log.v("Sleep interrupt",e.getMessage());
-                }
-            }
+    private void sendGCode(ArrayList<int[]> gCode){
+        for ( int[] koordinate : gCode){
+            gCodeToAxisMov(koordinate);
         }
         finish();
     }
 
+    private Vector<List<int[]>> splitGCode(ArrayList<int[]> gcode){
+        int vectorSize = gcode.size() / Constants.BLOCK_SIZE + 1;
+        Vector<List<int[]>> ret = new Vector<>();
+        for (int i = 0; i < vectorSize ; i++) {
+            if (i + 1 < vectorSize) {
+                ret.add(gcode.subList(i * Constants.BLOCK_SIZE, (i + 1) * Constants.BLOCK_SIZE));
+            } else {
+                ret.add(gcode.subList(i * Constants.BLOCK_SIZE,gcode.size() - 1));
+            }
+        }
+        return  ret;
+    }
+    
     private void gCodeToAxisMov(int[] koordinate) {
         if (koordinate[0] == -1) {
             koordinate[0] = CncState.absolute_X;
@@ -123,6 +117,9 @@ public class BackendRunnable implements Runnable, SerialInputOutputManager.Liste
     }
 
     private void finish(){
+        /*for(int i = 0; i< gcode.size(); i++){
+            Log.d("Read from CnC" ,CncState.CNC_CONNECTION.read());
+        }*/
         try {
             i.goCoordinate(0, 0, 0);
             i.stopTool();

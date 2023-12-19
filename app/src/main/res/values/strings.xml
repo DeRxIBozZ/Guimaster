@@ -46,5 +46,7 @@
     <string name="yourpic">Ausgewähltes Bild</string>
     <string name="milldescription">Fräsvorgang mit gegebenen Parametern starten?</string>
     <string name="backenderror">Fehler im Backend</string>
+    <string name="processdialog">Befehle werden übertragen, Verbindung nicht trennen</string>
+    <string name="debug">Block wurde übertragen</string>
 
 </resources>

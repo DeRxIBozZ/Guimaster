@@ -26,7 +26,7 @@ import de.adv.guimaster.backend.cnc.cnc_instructions.Instructions;
 import de.adv.guimaster.frontend.logic.Constants;
 import de.adv.guimaster.frontend.logic.DataHolder;
 
-public class SerialPort {
+public class SerialPort implements SerialInputOutputManager.Listener{
 
     public UsbSerialPort usbSerialPort;
     private int count = 0;
@@ -88,7 +88,7 @@ public class SerialPort {
         try {
             usbSerialPort.open(usbconnection);
             usbSerialPort.setParameters(38400,8,UsbSerialPort.STOPBITS_1,UsbSerialPort.PARITY_NONE);
-            initCncCommand();
+            initCncCommand(context);
         } catch (IOException ioException){
             Log.v("IOException",ioException.getMessage());
         }
@@ -97,12 +97,37 @@ public class SerialPort {
     public void sendStringToComm(String command){
         byte[] buffer = command.getBytes();
         count++;
-        System.out.println("Command : " + Arrays.toString(buffer) + "\nCount: " + count);
+        System.out.println("Command : " + command);
         try {
             usbSerialPort.write(buffer, Constants.WRITE_WAIT_MILLIS);
         } catch (IOException ioException){
             //Toast toast = Toast.makeText(this,ioException.getMessage(),Toast.LENGTH_LONG);
             //toast.show()
+        }
+    }
+
+    @Override
+    public void onNewData(byte[] data) {
+        System.out.println(new String(data,0,data.length));
+    }
+
+    @Override
+    public void onRunError(Exception e) {
+        Log.v("Data Transfer error", e.getMessage());
+    }
+
+    public String read(){
+        try {
+            byte[] dest = new byte[4096];
+            int length = usbSerialPort.read(dest, 0);
+            if(length > 0 ) {
+                return new String(dest, 0, length);
+            } else {
+                return "Länge : " + length;
+            }
+        } catch (IOException e){
+            System.out.println(e.getMessage());
+            return e.getMessage();
         }
     }
 
@@ -114,7 +139,7 @@ public class SerialPort {
         }
     }
 
-    public void initCncCommand(){
+    public void initCncCommand(Context context){
         sendStringToComm("P0010=38400;");
         sendStringToComm("P0011=1;");
         sendStringToComm("P0014=1008;");
@@ -219,6 +244,9 @@ public class SerialPort {
         sendStringToComm("P9205=2200;");
         sendStringToComm("!N;RF;");
         SerialPort.runnable = new BackendRunnable();
-        SerialPort.usbIOmanager = new SerialInputOutputManager(usbSerialPort,SerialPort.runnable);
+        SerialPort.usbIOmanager = new SerialInputOutputManager(usbSerialPort, this);
+        //SerialPort.usbIOmanager.setReadBufferSize(4096);
+        //SerialPort.usbIOmanager.run();
+
     }
 }

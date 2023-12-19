@@ -52,10 +52,11 @@ public class ConnectionActivity extends AppCompatActivity {
         View root = iv.getRootView();
         root.setBackgroundColor(ContextCompat.getColor(this,R.color.anthrazit));
         UsbManager manager = (UsbManager) getSystemService(Context.USB_SERVICE);
-        serialPort = new SerialPort(manager);
-        holder.save("SerialPort",serialPort);
+        //serialPort = new SerialPort(manager);
+        //holder.save("SerialPort",serialPort);
+        serialPortFinder.getAllDevicesPath();
         holder.save("ConnectionActivity",this);
-        attachDevice();
+        //attachDevice();
     }
 
 
